@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 import Card from "../../components/Card";
+import SingleChoice from "../../components/SingleChoiceFilter";
 import theme from "../../style/Theme";
 
 const Container = styled.div`
@@ -27,9 +28,7 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
   return (
       <Container>
           <FilterColumn>
-              <Card title="Sorting" >
-                Sorting Card
-              </Card>
+            <SingleChoice title="Sort" />
           </FilterColumn>
 
           <ListingColumn>

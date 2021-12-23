@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import theme from '../style/Theme';
 
 const Container =  styled.div`
+    border-radius: ${theme.borderRadius};
     ${theme.shadow.elevation1};
-    ${theme.borderRadius};
     padding: ${theme.spacing(6)};
     background-color: ${theme.color.white}; 
 `

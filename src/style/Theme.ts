@@ -1,14 +1,21 @@
+export const colors = {
+  white: "#fff",
+  white1: "#F2F0FD",
+  blue1: "#1EA4CE",
+  blue2: "#147594",
+  grey1: "#525252"
+}
 const theme = {
   color: {
     white: "#fff",
   },
   palette: {
     primary: {
-      main: "#1EA4CE",
-      light: "#F2F0FD",
+      main: colors.blue1,
+      light: colors.white1,
     },
     secondary: {
-      main: "#147594",
+      main: colors.blue2,
     },
     accent: {
       main: "#ffd300",
@@ -26,16 +33,25 @@ const theme = {
     text: {
       primary: "#191919",
       secondary: "#697488",
-      tertiary: "#6F6F6F"
+      tertiary: "#6F6F6F",
+      label: "#525252"
+
     },
   },
   spacing: (multiplier = 1) => `${4 * multiplier}px`,
+  formItemSpace: "18px",
   borderRadius: "2px",
   shadow: {
     elevation1: { "box-shadow": "0px 6px 24px rgba(93, 62, 188, 0.04)" },
   },
+  transition1: 'transition: all 0.2s ease;',
 
   typography: {
+    label: {
+      "font-size": "14px",
+      "line-height": "18px",
+      "color": colors.grey1
+    },
     h1: {
       "font-weight": "bold",
       "font-size": "68px",
