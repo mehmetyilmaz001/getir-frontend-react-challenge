@@ -1,8 +1,9 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import styled from "styled-components";
-import Card from "../../components/Card";
 import SingleChoice from "../../components/SingleChoiceFilter";
+import { SortEnum, SortEnumMap } from "../../enums/Sort";
 import theme from "../../style/Theme";
+import { Option } from "../../types/Option";
 
 const Container = styled.div`
   display: flex;
@@ -24,11 +25,22 @@ const BasketColumn = styled.div`
 
 interface ProductListProps {}
 
+
+const sortOptions: Option[] = Object.keys(SortEnumMap).map((i: string) => {
+    const value = (i as unknown) as SortEnum;
+    return  { value, label: SortEnumMap[value]}
+});
+
+
 const ProductList: FunctionComponent<ProductListProps> = () => {
   return (
       <Container>
           <FilterColumn>
-            <SingleChoice title="Sort" />
+            <SingleChoice 
+              title="Sort" 
+              options={sortOptions}
+              onChange={(sort: SortEnum) => console.log(sort)}
+            />
           </FilterColumn>
 
           <ListingColumn>

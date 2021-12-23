@@ -1,20 +1,25 @@
-import React, { FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import Card from './Card';
 import RadioButton from './RadioButton/RadioButton';
+import {Option} from '../types/Option';
 
 
 interface SingleChoiceProps {
     title: string;
-    // options: string[];
-    // onChange: (value: string) => void;
+    options: Option[];
+    onChange: (value: any) => void;
 }
  
-const SingleChoice: FunctionComponent<SingleChoiceProps> = ({title}) => {
-    const [ value, setValue ] = React.useState<string>('All');
+const SingleChoice: FunctionComponent<SingleChoiceProps> = ({title, options, onChange}) => {
     return ( 
         <Card title={title}>
-            <RadioButton id="1" name="sort" label='1' value="1" onChange={() => console.log("1")} />
-            <RadioButton id="2" name="sort" label='2' value="2" onChange={() => console.log("2")} />
+            {options.map(i => <RadioButton 
+                                    key={i.label} 
+                                    id={i.value} 
+                                    name={title} 
+                                    label={i.label} 
+                                    value={i.value} 
+                                    onChange={onChange} />) }
         </Card>        
      );
 }

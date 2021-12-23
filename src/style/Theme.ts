@@ -49,7 +49,7 @@ const theme = {
   typography: {
     label: {
       "font-size": "14px",
-      "line-height": "18px",
+      "line-height": "20px",
       "color": colors.grey1
     },
     h1: {
