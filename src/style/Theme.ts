@@ -1,14 +1,11 @@
 const theme = {
     palette: {
       primary: {
-        main: '#5d3ebc',
-        light: '#f3f0fe',
-        dark: '#CC4400'
+        main: '#1EA4CE',
+        light: '#F2F0FD'
       },
       secondary: {
-        main: '#7849f7',
-        light: '',
-        dark: ''
+        main: '#147594',
       },
       accent: {
         main: '#ffd300',
@@ -21,10 +18,7 @@ const theme = {
         dark: '#BD3A3A'
       },
       background: {
-        body: '#fafafa',
-        base: '#f5f5f5',
-        alt1: '#697488',
-        alt2: '#484848'
+        body: '#FAFAFA',
       },
       text: {
         primary: '#191919'
@@ -60,6 +54,10 @@ const theme = {
       body: {
         'font-weight': 'normal',
         'font-size': '14px'
+      },
+      footer: {
+        'font-weight': 'normal',
+        'font-size': '13px'
       },
       button: {
         'font-weight': 'bold',

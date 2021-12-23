@@ -5,7 +5,8 @@ import theme from './Theme';
 const GlobalStyle = createGlobalStyle`
   ${normalize};
   body {
-    font-family: 'Open Sans", "Helvetica Neue", Helvetica, Arial, "sans-serif';
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
     background: ${theme.palette.background.body};
     color: ${theme.palette.text.primary};
     ${theme.typography.body};
