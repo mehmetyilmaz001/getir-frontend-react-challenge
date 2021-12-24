@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const FilterColumn = styled.div`
   flex:1;
-  div {
+  > div {
     margin-bottom: ${theme.spacing(6)};
   }
 `
@@ -43,6 +43,15 @@ const brandOptions: Option[] = [
   {value: "xiaomi", label: "Xiaomi"},
 ]
 
+const tagOptions: Option[] = [
+  {value: "All", label: "All"},
+  {value: "Beach", label: "Beach"},
+  {value: "Bike", label: "Bike"},
+  {value: "People", label: "People"},
+  {value: "People", label: "People"},
+  {value: "People", label: "People"},
+]
+
 
 const ProductList: FunctionComponent<ProductListProps> = () => {
   return (
@@ -59,6 +68,14 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
               options={brandOptions}
               hasSearch={true}
               searchPlaceholder="Search brand"
+              onChange={(sort: SortEnum) => console.log(sort)}
+            />
+
+            <CheckboxGroup
+              title="Tags" 
+              options={tagOptions}
+              hasSearch={true}
+              searchPlaceholder="Search tag"
               onChange={(sort: SortEnum) => console.log(sort)}
             />
           </FilterColumn>

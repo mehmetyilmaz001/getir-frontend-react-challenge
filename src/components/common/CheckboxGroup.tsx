@@ -14,7 +14,7 @@ interface CheckboxGroupProps {
 }
 
 const OptionsContiner = styled.div`
-  max-height: 350px;
+  max-height: 150px;
   overflow-y: scroll;
   padding: 4px;
   margin: -4px;
