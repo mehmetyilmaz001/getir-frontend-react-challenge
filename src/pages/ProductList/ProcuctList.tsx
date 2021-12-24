@@ -33,6 +33,17 @@ const ProductListGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: ${theme.spacing(5)};
+  padding: ${theme.spacing(5)};
+  background: #FFFFFF;
+  box-shadow: 0px 4px 24px rgba(93, 62, 188, 0.04);
+  border-radius: 2px;
+`;
+
+
+const Title = styled.h4`
+  color: ${theme.palette.text.tertiary};
+  font-size: 20px;
+  margin-top: 0;
 `;
 
 interface ProductListProps {}
@@ -88,12 +99,12 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
           </FilterColumn>
 
           <ListingColumn>
-
+            <Title>Products</Title>
             <ProductListGrid>
               {Array(30).fill(1).map(i => <ProductCard 
                 title="Deneme" 
                 price={213123} 
-                imgSrc="https://picsum.photos/200/300?random=1" id={1}
+                imgSrc="https://picsum.photos/200/300?random=2" id={1}
                 onSelect={() => console.log("Selected")}
                 />) }
               </ProductListGrid>
