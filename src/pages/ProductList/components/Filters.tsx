@@ -5,6 +5,8 @@ import RadioGroup from "../../../components/common/RadioGroup";
 import { SortEnum, SortEnumMap } from "../../../enums/Sort";
 import { Option } from "../../../components/common/types/Option";
 import Card from "../../../components/common/Card";
+import { sortProducts } from "../../../redux/reducers/ProductReducer";
+import { useDispatch } from "react-redux";
 
 const sortOptions: Option[] = Object.keys(SortEnumMap).map((i: string) => {
   const value = i as unknown as SortEnum;
@@ -23,8 +25,7 @@ const FiltersWithLookup: React.FunctionComponent<IFiltersWithLookup> = ({
   loading,
 }) => {
 
-    console.log("brands", brands);
-
+  const dispatch = useDispatch();
 
   const SkeletonList = () => {
     return (
@@ -53,7 +54,7 @@ const FiltersWithLookup: React.FunctionComponent<IFiltersWithLookup> = ({
       <RadioGroup
         title="Sort"
         options={sortOptions}
-        onChange={(sort: SortEnum) => console.log(sort)}
+        onChange={(sort: SortEnum) => dispatch(sortProducts(sort))}
       />
       <CheckboxGroup
         title="Brands"

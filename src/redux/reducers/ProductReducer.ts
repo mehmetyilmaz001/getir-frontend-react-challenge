@@ -1,22 +1,37 @@
+import { SortEnum, SortMapFunction } from './../../enums/Sort';
 import { Pagination } from './../../types/Pagination';
 import { API_ITEMS_URL } from './../../constants/api';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch, AppThunk } from "..";
 import { Item } from "../../types/Item";
 
-interface PaginationData <T>{
-  count: number,
-  items:T
+interface IPaginationData <T>{
+  count: number;
+  items:T;
+}
+
+interface IFilter{
+  tags: string[];
+  brands: string[];
+  itemType: string | null;
+  sort: SortEnum | null;
 }
 
 export type ProductReducerType = {
     loading: boolean;
-    data: PaginationData<Item[]>;
+    data: IPaginationData<Item[]>;
+    filter: IFilter;
   };
   
   const initialState: ProductReducerType = {
     loading: false,
     data: {count: 0, items:[]},
+    filter: {
+      tags: [],
+      brands: [],
+      itemType: null,
+      sort: null
+    }
   };
 
 
@@ -24,10 +39,18 @@ export type ProductReducerType = {
     name: "product",
     initialState,
     reducers: {
-      setList: (state: ProductReducerType, action: PayloadAction<PaginationData<Item[]>>) => void (state.data = action.payload),
+      setData: (state: ProductReducerType, action: PayloadAction<IPaginationData<Item[]>>) => void (state.data = action.payload),
       setLoading: (state: ProductReducerType, action: PayloadAction<boolean>) => void (state.loading = action.payload),
+      setFilter: (state: ProductReducerType, action: PayloadAction<IFilter> ) => void (state.filter = action.payload),
     }
   });
+
+
+  export const {
+    setLoading,
+    setData,
+    setFilter
+  } = product.actions;
 
   export const getProducts = (pagination: Pagination): AppThunk => async (dispatch: AppDispatch) => {
     
@@ -37,12 +60,12 @@ export type ProductReducerType = {
         const itemsJson = await serviceRes.json();
         if(serviceRes.ok && serviceRes.status === 200){
             
-            const data: PaginationData<Item[]> = {
+            const data: IPaginationData<Item[]> = {
               count: serviceRes.headers.get('X-Total-Count') ? parseInt(serviceRes.headers.get('X-Total-Count')!) : 0,
               items: itemsJson
             }
             
-            dispatch(setList(data));
+            dispatch(setData(data));
         }
         
     }catch(e){
@@ -50,15 +73,23 @@ export type ProductReducerType = {
     }finally{
         dispatch(setLoading(false));
     }
+  };
+
+
+  export const sortProducts = (sortParam: SortEnum): AppThunk => async (dispatch: AppDispatch, getState) => {
+    
+    const data = getState().product.data;
+    let items = [...data.items];
+
+    items.sort(SortMapFunction[sortParam]);
+    
+    dispatch(setLoading(true));
+    setTimeout(() => {
+      dispatch(setData({...data, items}));
+      dispatch(setLoading(false));
+    }, 500)
+    
     
   };
-  
-
-  
-  export const {
-    setLoading,
-    setList,
-  } = product.actions;
-
 
   export default product.reducer;

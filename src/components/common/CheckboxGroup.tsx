@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { FunctionComponent, useState } from "react";
 import styled from "styled-components";
+import useDidUpdate from "../../hooks/useDidUpdate";
 import Card from "./Card";
 import Checkbox from "./Checkbox/Checkbox";
 import Input from "./Input/Input";
@@ -32,10 +33,15 @@ const CheckboxGroup: FunctionComponent<CheckboxGroupProps> = ({
 
 
   const [_options, setOptions] = useState<Option[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
 
   useEffect(() => {
     setOptions([...options])
   }, [options])
+  
+  useDidUpdate(() => {
+    onChange(selectedOptions);
+  }, [selectedOptions])
 
   const _onFilter = (searchTerm: string) => {
     if (searchTerm === "") {
@@ -48,6 +54,14 @@ const CheckboxGroup: FunctionComponent<CheckboxGroupProps> = ({
       )
     );
   };
+
+
+  const _onSelect = (option: Option) => {
+    const found = selectedOptions.find((i) => i.value === option.value);
+    setSelectedOptions( found ? selectedOptions.filter((i) => i.value !== option.value) : [...selectedOptions, option])
+  }
+
+
   return (
     <Card title={title}>
       {hasSearch && (
@@ -65,12 +79,13 @@ const CheckboxGroup: FunctionComponent<CheckboxGroupProps> = ({
             id={i.value}
             label={i.label}
             value={i.value}
-            onChange={onChange}
+            onChange={() => _onSelect(i)}
           />
         ))}
       </OptionsContiner>
     </Card>
   );
 };
+
 
 export default React.memo(CheckboxGroup);
