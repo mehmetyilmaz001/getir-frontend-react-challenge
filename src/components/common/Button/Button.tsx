@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import theme from "../../../style/Theme";
 
-const Button = styled.button`
-    background-color: ${theme.palette.primary.main};
-    color: white;
+const Button = styled.button<{
+    customType: "primary" | "secondary";
+}>`
+    background-color: ${({customType}) => theme.palette[customType]["main"]};
+    color: ${({customType}) => customType as string === "primary" ? "white" : theme.palette.text.primary};
     border: none;
     height: 22px;
     border-radius: 2px;
@@ -11,11 +13,13 @@ const Button = styled.button`
     font-size: 12px;
 
     :hover {
-        background-color: ${theme.palette.secondary.main};
+        background-color: ${({customType}) => theme.palette[customType]["hover"]};
+        color: ${({customType}) => theme.palette[customType]["activeTextColor"]};
     }
 
     :active {
-        background-color: ${theme.palette.secondary.light};
+        background-color: ${({customType}) => theme.palette[customType]["active"]};
+        color: ${({customType}) => theme.palette[customType]["activeTextColor"]};
     }
 `;
 

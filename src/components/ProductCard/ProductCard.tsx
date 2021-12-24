@@ -12,7 +12,7 @@ interface Product {
 }
 
 interface ProductCardProps extends Product {
-  onSelect: (product: Product) => void;
+  onSelect: () => void;
 }
 
 const Container = styled.div`
@@ -44,12 +44,12 @@ const Title = styled.h4`
     margin:0;
 `;    
 
-const ProductCard: FunctionComponent<ProductCardProps> = ({imgSrc, title, price}) => {
+const ProductCard: FunctionComponent<ProductCardProps> = ({imgSrc, title, price, onSelect}) => {
   return <Container>
         <Picture src={imgSrc} loading="lazy" alt={title} />
         <Price price={price} />
         <Title>{title}</Title>
-        <Button>Add</Button>
+        <Button customType="primary" onClick={() => onSelect()}>Add</Button>
   </Container>;
 };
 

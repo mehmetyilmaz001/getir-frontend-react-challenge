@@ -14,16 +14,21 @@ const theme = {
     primary: {
       main: colors.blue1,
       light: colors.white1,
+      hover: colors.blue2,
+      active: colors.gray2,
+      activeTextColor: colors.white,
     },
     secondary: {
-      main: colors.blue2,
-      light: colors.gray1,
+      main: colors.white1,
+      hover: colors.gray2,
+      active: colors.gray1,
+      activeTextColor: colors.white,
     },
     accent: {
-      main: "#ffd300",
-      light: "",
-      dark: "",
+      main: colors.blue2,
+      light: colors.white1,
     },
+   
     attention: {
       main: "#db471e",
       light: "#F04A4A",
