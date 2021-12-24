@@ -1,6 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'polished';
 import theme from './Theme';
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 const GlobalStyle = createGlobalStyle`
   ${normalize};

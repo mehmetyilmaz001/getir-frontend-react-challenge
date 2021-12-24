@@ -6,9 +6,9 @@ import { getDataAndDispatch } from '../../helpers/action';
 
 export type LookupReducerType = {
     loading: boolean;
-    tags: Option[];
-    brands: Option[];
-    itemTypes: Option[];
+    tags: string[];
+    brands: string[];
+    itemTypes: string[];
   };
   
   const initialState: LookupReducerType = {
@@ -23,9 +23,9 @@ export type LookupReducerType = {
     name: "lookup",
     initialState,
     reducers: {
-      setTags: (state: LookupReducerType, action: PayloadAction<Option[]>) => void (state.tags = action.payload),
-      setBrands: (state: LookupReducerType, action: PayloadAction<Option[]>) => void (state.brands = action.payload),
-      setItemTypes: (state: LookupReducerType, action: PayloadAction<Option[]>) => void (state.itemTypes = action.payload),
+      setTags: (state: LookupReducerType, action: PayloadAction<string[]>) => void (state.tags = action.payload),
+      setBrands: (state: LookupReducerType, action: PayloadAction<string[]>) => void (state.brands = action.payload),
+      setItemTypes: (state: LookupReducerType, action: PayloadAction<string[]>) => void (state.itemTypes = action.payload),
       setLoading: (state: LookupReducerType, action: PayloadAction<boolean>) => void (state.loading = action.payload),
     }
   });
@@ -40,7 +40,7 @@ export type LookupReducerType = {
 
   export const getTags = (): AppThunk => async (dispatch: AppDispatch) => {
 
-    dispatch(getDataAndDispatch<Option[]>({
+    dispatch(getDataAndDispatch<string[]>({
       loadingDispatch: setLoading, 
       successDispatch:  setTags, 
       url: API_TAGS_URL
@@ -48,7 +48,7 @@ export type LookupReducerType = {
   }
 
   export const getBrands = (): AppThunk => async (dispatch: AppDispatch) => {
-    dispatch(getDataAndDispatch<Option[]>({
+    dispatch(getDataAndDispatch<string[]>({
       loadingDispatch: setLoading, 
       successDispatch:  setBrands, 
       url: API_BRANDS_URL
@@ -56,7 +56,7 @@ export type LookupReducerType = {
   };
   
   export const getItemTypes = (): AppThunk => async (dispatch: AppDispatch) => {
-    dispatch(getDataAndDispatch<Option[]>({
+    dispatch(getDataAndDispatch<string[]>({
       loadingDispatch: setLoading, 
       successDispatch:  setItemTypes, 
       url: API_ITEM_TYPES_URL

@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 import Card from "./Card";
@@ -28,14 +29,20 @@ const CheckboxGroup: FunctionComponent<CheckboxGroupProps> = ({
   hasSearch,
   searchPlaceholder,
 }) => {
-  const [optionsS, setOptionsS] = useState([...options]);
+
+
+  const [_options, setOptions] = useState<Option[]>([]);
+
+  useEffect(() => {
+    setOptions([...options])
+  }, [options])
 
   const _onFilter = (searchTerm: string) => {
     if (searchTerm === "") {
-      setOptionsS([...options]);
+      setOptions([...options]);
     }
 
-    setOptionsS(
+    setOptions(
       options.filter((option) =>
         option.label.toLowerCase().includes(searchTerm.toLowerCase())
       )
@@ -52,7 +59,7 @@ const CheckboxGroup: FunctionComponent<CheckboxGroupProps> = ({
       )}
 
       <OptionsContiner>
-        {optionsS.map((i) => (
+        {_options.map((i) => (
           <Checkbox
             key={i.label}
             id={i.value}
@@ -66,4 +73,4 @@ const CheckboxGroup: FunctionComponent<CheckboxGroupProps> = ({
   );
 };
 
-export default CheckboxGroup;
+export default React.memo(CheckboxGroup);

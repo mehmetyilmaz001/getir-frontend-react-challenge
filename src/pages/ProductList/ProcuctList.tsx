@@ -1,6 +1,5 @@
-import { FunctionComponent, useEffect } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import styled from "styled-components";
-import CheckboxGroup from "../../components/common/CheckboxGroup";
 import RadioGroup from "../../components/common/RadioGroup";
 import { SortEnum, SortEnumMap } from "../../enums/Sort";
 import theme from "../../style/Theme";
@@ -10,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/reducers/ProductReducer";
 import { Store } from "../../redux";
 import { getBrands, getItemTypes, getTags } from "../../redux/reducers/LookupReducer";
+import { Pagination } from "../../types/Pagination";
+import FiltersWithLookup from "./components/Filters";
 
 const Container = styled.div`
   display: flex;
@@ -53,75 +54,40 @@ const Title = styled.h4`
 interface ProductListProps {}
 
 
-const sortOptions: Option[] = Object.keys(SortEnumMap).map((i: string) => {
-    const value = (i as unknown) as SortEnum;
-    return  { value, label: SortEnumMap[value]}
-});
-
-const brandOptions: Option[] = [
-  {value: "apple", label: "Apple"},
-  {value: "samsung", label: "Samsung"},
-  {value: "huawei", label: "Huawei"},
-  {value: "xiaomi", label: "Xiaomi"},
-]
-
-const tagOptions: Option[] = [
-  {value: "All", label: "All"},
-  {value: "Beach", label: "Beach"},
-  {value: "Bike", label: "Bike"},
-  {value: "People", label: "People"},
-  {value: "People", label: "People"},
-  {value: "People", label: "People"},
-]
-
-
 const ProductList: FunctionComponent<ProductListProps> = () => {
 
+  const [ pagination, setPagination ] = useState<Pagination>({
+    page: 1,
+    pageSize: 16,
+    count: 0,
+  })
+
   const dispatch = useDispatch();
-  const {list, loading} = useSelector((state: Store) => state.product);
+  const {data, loading} = useSelector((state: Store) => state.product);
+  const {brands, tags, itemTypes, loading: lookupLoading} = useSelector((state: Store) => state.lookup);
+  
 
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getProducts(pagination));
+  }, [dispatch, pagination])
+
+
+  useEffect(() => {
     dispatch(getTags());
     dispatch(getBrands());
     dispatch(getItemTypes());
   }, [dispatch])
 
-
-  if(loading){
-    return <>Loading</>
-  }
-
   return (
       <Container>
           <FilterColumn>
-            <RadioGroup 
-              title="Sort" 
-              options={sortOptions}
-              onChange={(sort: SortEnum) => console.log(sort)}
-            />
-
-            <CheckboxGroup
-              title="Brands" 
-              options={brandOptions}
-              hasSearch={true}
-              searchPlaceholder="Search brand"
-              onChange={(sort: SortEnum) => console.log(sort)}
-            />
-
-            <CheckboxGroup
-              title="Tags" 
-              options={tagOptions}
-              hasSearch={true}
-              searchPlaceholder="Search tag"
-              onChange={(sort: SortEnum) => console.log(sort)}
-            />
+            <FiltersWithLookup brands={brands} tags={tags} loading={lookupLoading} />
           </FilterColumn>
 
           <ListingColumn>
             <Title>Products</Title>
-            <ProductListGrid>
-              {list.map(i => <ProductCard
+            {/* <ProductListGrid>
+              {data.items.map(i => <ProductCard
                 key={i.name}
                 title={i.name} 
                 price={i.price} 
@@ -129,7 +95,7 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
                 id={i.name}
                 onSelect={() => console.log(i)}
                 />) }
-              </ProductListGrid>
+              </ProductListGrid> */}
           </ListingColumn>
 
           <BasketColumn>Basket</BasketColumn>
@@ -137,5 +103,7 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
       </Container>
   )
 };
+
+
 
 export default ProductList;
