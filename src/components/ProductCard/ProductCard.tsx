@@ -20,6 +20,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: ${theme.spacing(2)};
+  cursor: pointer;
 `;
 
 
@@ -29,6 +30,12 @@ const Picture = styled.img`
     padding: 16px;
     border-radius: 12px;
     border: 1px solid ${theme.palette.border.main};
+    transition: all 0.2s ease-in-out;
+
+    :hover {
+      transform: scale(1.05);
+
+    }
 `;
 
 
