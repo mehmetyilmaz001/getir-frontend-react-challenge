@@ -29,6 +29,11 @@ const BasketColumn = styled.div`
   flex:1;
 `
 
+const ProductListGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+`;
+
 interface ProductListProps {}
 
 
@@ -82,12 +87,15 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
           </FilterColumn>
 
           <ListingColumn>
-            <ProductCard 
-              title="Deneme" 
-              price={213123} 
-              imgSrc="https://picsum.photos/200/300?random=1" id={1}
-              onSelect={() => console.log("Selected")}
-              />
+
+            <ProductListGrid>
+              {Array(30).fill(1).map(i => <ProductCard 
+                title="Deneme" 
+                price={213123} 
+                imgSrc="https://picsum.photos/200/300?random=1" id={1}
+                onSelect={() => console.log("Selected")}
+                />) }
+              </ProductListGrid>
           </ListingColumn>
 
           <BasketColumn>Basket</BasketColumn>
