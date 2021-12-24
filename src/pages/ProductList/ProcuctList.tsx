@@ -28,6 +28,9 @@ const FilterColumn = styled.div`
 
 const ListingColumn = styled.div`
   flex:3;
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing(4)};
 `
 
 const BasketColumn = styled.div`
@@ -49,6 +52,7 @@ const Title = styled.h4`
   color: ${theme.palette.text.tertiary};
   font-size: 20px;
   margin-top: 0;
+  margin-bottom: 0;
 `;
 
 interface ProductListProps {}
@@ -86,7 +90,15 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
 
           <ListingColumn>
             <Title>Products</Title>
-            {/* <ProductListGrid>
+
+            <RadioGroup 
+              type="button"
+              value={"mug"}
+              options={itemTypes.map(i => ({label: i, value: i}))} 
+              onChange={(itemType) => console.log("item type: ", itemType)}
+              />
+
+            <ProductListGrid>
               {data.items.map(i => <ProductCard
                 key={i.name}
                 title={i.name} 
@@ -95,7 +107,7 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
                 id={i.name}
                 onSelect={() => console.log(i)}
                 />) }
-              </ProductListGrid> */}
+              </ProductListGrid>
           </ListingColumn>
 
           <BasketColumn>Basket</BasketColumn>

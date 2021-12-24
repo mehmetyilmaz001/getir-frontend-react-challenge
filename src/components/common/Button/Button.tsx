@@ -7,7 +7,8 @@ const Button = styled.button<{
     background-color: ${({customType}) => theme.palette[customType]["main"]};
     color: ${({customType}) => customType as string === "primary" ? "white" : theme.palette.text.primary};
     border: none;
-    height: 22px;
+    height: 32px;
+    min-width: 80px;
     border-radius: 2px;
     cursor: pointer;
     font-size: 12px;
