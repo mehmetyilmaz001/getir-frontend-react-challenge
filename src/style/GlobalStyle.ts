@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
   
   ::-webkit-scrollbar-thumb {
     border-radius: 4px;
-    background-color: rgba(0, 0, 0, .5);
+    background-color: ${theme.palette.border.main};
     box-shadow: 0 0 1px rgba(255, 255, 255, .5);
   }
   body {

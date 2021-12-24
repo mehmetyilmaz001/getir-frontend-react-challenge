@@ -5,6 +5,7 @@ import RadioGroup from "../../components/common/RadioGroup";
 import { SortEnum, SortEnumMap } from "../../enums/Sort";
 import theme from "../../style/Theme";
 import { Option } from "../../components/common/types/Option";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
 const Container = styled.div`
   display: flex;
@@ -81,7 +82,12 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
           </FilterColumn>
 
           <ListingColumn>
-            Products
+            <ProductCard 
+              title="Deneme" 
+              price={213123} 
+              imgSrc="https://picsum.photos/200/300?random=1" id={1}
+              onSelect={() => console.log("Selected")}
+              />
           </ListingColumn>
 
           <BasketColumn>Basket</BasketColumn>
