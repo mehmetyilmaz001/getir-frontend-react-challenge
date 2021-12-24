@@ -9,6 +9,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/reducers/ProductReducer";
 import { Store } from "../../redux";
+import { getBrands, getTags } from "../../redux/reducers/LookupReducer";
 
 const Container = styled.div`
   display: flex;
@@ -81,6 +82,8 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
 
   useEffect(() => {
     dispatch(getProducts());
+    dispatch(getTags());
+    dispatch(getBrands());
   }, [dispatch])
 
 

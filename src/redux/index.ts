@@ -1,8 +1,10 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import LookupReducer from "./reducers/LookupReducer";
 import ProductReducer from "./reducers/ProductReducer";
 
 const store = configureStore({ reducer: {
     product: ProductReducer,
+    lookup: LookupReducer
 } });
 
 export type Store = ReturnType<typeof store.getState>;
