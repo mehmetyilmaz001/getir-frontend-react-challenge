@@ -3,7 +3,8 @@ export const colors = {
   white1: "#F2F0FD",
   blue1: "#1EA4CE",
   blue2: "#147594",
-  grey1: "#525252"
+  gray1: "#525252",
+  gray2: "#E0E0E0"
 }
 const theme = {
   color: {
@@ -27,6 +28,7 @@ const theme = {
       light: "#F04A4A",
       dark: "#BD3A3A",
     },
+    border: { main: colors.gray2 },
     background: {
       body: "#FAFAFA",
     },
@@ -34,8 +36,8 @@ const theme = {
       primary: "#191919",
       secondary: "#697488",
       tertiary: "#6F6F6F",
-      label: "#525252"
-
+      label: "#525252",
+      placeholder: colors.gray2
     },
   },
   spacing: (multiplier = 1) => `${4 * multiplier}px`,
@@ -50,7 +52,8 @@ const theme = {
     label: {
       "font-size": "14px",
       "line-height": "20px",
-      "color": colors.grey1
+      "color": colors.gray1,
+      "user-select": "none"
     },
     h1: {
       "font-weight": "bold",

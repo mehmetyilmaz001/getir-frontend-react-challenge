@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import theme from "../../../style/Theme";
-import check from '../assets/check.svg';
+import theme from "../../../../style/Theme";
+import check from '../../assets/check.svg';
 
 const StyledRadioButton = styled.input.attrs(_props => ({
     type: 'radio'
@@ -21,8 +21,8 @@ const StyledRadioButton = styled.input.attrs(_props => ({
         position: absolute;
         left: 0;
         top: 0;
-        width: 18px;
-        height: 18px;
+        width: 22px;
+        height: 22px;
         border: 1px solid #ddd;
         border-radius: 100%;
         background: #fff;
@@ -30,8 +30,8 @@ const StyledRadioButton = styled.input.attrs(_props => ({
 
     :checked + label:after, :not(:checked) + label:after {
         content: '';
-        width: 16px;
-        height: 16px;
+        width: 22px;
+        height: 22px;
         border: solid 2px ${theme.palette.primary.main};
         position: absolute;
         top: 0px;

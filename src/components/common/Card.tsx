@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import styled from 'styled-components';
-import theme from '../style/Theme';
+import theme from '../../style/Theme';
 
 const Container =  styled.div`
     border-radius: ${theme.borderRadius};
@@ -24,12 +24,12 @@ interface CardProps {
 const Card: FunctionComponent<CardProps> = ({children, title}) => {
     return (
         
-        <>
+        <div>
             {title && <Title>{title}</Title>}
             <Container>
                 {children}
             </Container>
-        </>
+        </div>
      );
 }
  

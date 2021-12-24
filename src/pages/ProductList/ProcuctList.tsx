@@ -1,18 +1,23 @@
 import { FunctionComponent } from "react";
 import styled from "styled-components";
-import SingleChoice from "../../components/SingleChoiceFilter";
+import CheckboxGroup from "../../components/common/CheckboxGroup";
+import RadioGroup from "../../components/common/RadioGroup";
 import { SortEnum, SortEnumMap } from "../../enums/Sort";
 import theme from "../../style/Theme";
-import { Option } from "../../types/Option";
+import { Option } from "../../components/common/types/Option";
 
 const Container = styled.div`
   display: flex;
   flex-direction: row;
   gap: ${theme.spacing(4)};
+  
 `;
 
 const FilterColumn = styled.div`
   flex:1;
+  div {
+    margin-bottom: ${theme.spacing(6)};
+  }
 `
 
 const ListingColumn = styled.div`
@@ -31,14 +36,29 @@ const sortOptions: Option[] = Object.keys(SortEnumMap).map((i: string) => {
     return  { value, label: SortEnumMap[value]}
 });
 
+const brandOptions: Option[] = [
+  {value: "apple", label: "Apple"},
+  {value: "samsung", label: "Samsung"},
+  {value: "huawei", label: "Huawei"},
+  {value: "xiaomi", label: "Xiaomi"},
+]
+
 
 const ProductList: FunctionComponent<ProductListProps> = () => {
   return (
       <Container>
           <FilterColumn>
-            <SingleChoice 
+            <RadioGroup 
               title="Sort" 
               options={sortOptions}
+              onChange={(sort: SortEnum) => console.log(sort)}
+            />
+
+            <CheckboxGroup
+              title="Brands" 
+              options={brandOptions}
+              hasSearch={true}
+              searchPlaceholder="Search brand"
               onChange={(sort: SortEnum) => console.log(sort)}
             />
           </FilterColumn>

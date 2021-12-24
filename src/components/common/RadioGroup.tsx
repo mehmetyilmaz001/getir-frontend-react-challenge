@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import Card from './Card';
 import RadioButton from './RadioButton/RadioButton';
-import {Option} from '../types/Option';
+import {Option} from './types/Option';
 
 
 interface SingleChoiceProps {
