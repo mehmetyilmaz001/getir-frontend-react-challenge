@@ -17,6 +17,7 @@ const theme = {
     },
     secondary: {
       main: colors.blue2,
+      light: colors.gray1,
     },
     accent: {
       main: "#ffd300",

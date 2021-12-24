@@ -26,6 +26,7 @@ const Container = styled.div`
 const Picture = styled.img`
     height: 92px;
     width: 100%;
+    width: 100%;
     padding: 16px;
     border-radius: 12px;
     border: 1px solid ${theme.palette.border.main};

@@ -32,6 +32,7 @@ const BasketColumn = styled.div`
 const ProductListGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: ${theme.spacing(5)};
 `;
 
 interface ProductListProps {}
