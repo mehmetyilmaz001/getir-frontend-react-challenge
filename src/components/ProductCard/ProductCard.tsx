@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import styled from "styled-components";
 import theme from "../../style/Theme";
+import Button from "../common/Button/Button";
 import FormattedLabel from "../common/FormattedLabel/FormattedLabel";
 
 interface Product {
@@ -48,6 +49,7 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({imgSrc, title, price}
         <Picture src={imgSrc} loading="lazy" alt={title} />
         <Price price={price} />
         <Title>{title}</Title>
+        <Button>Add</Button>
   </Container>;
 };
 
