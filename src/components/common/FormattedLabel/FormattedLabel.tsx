@@ -2,18 +2,13 @@ import * as React from 'react';
 
 function formatMyMoney(price: number) {
   
-    var currency_symbol = "₺"
+    // var currency_symbol = "₺"
   
     var formattedOutput = new Intl.NumberFormat('tr-TR', {
         style: 'currency',
         currency: 'TRY',
         minimumFractionDigits: 2,
       });
-
-
-      console.log(currency_symbol);
-      
-  
     return `${formattedOutput.format(price)}`
   }
   

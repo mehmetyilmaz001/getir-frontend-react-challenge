@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect } from "react";
 import styled from "styled-components";
 import CheckboxGroup from "../../components/common/CheckboxGroup";
 import RadioGroup from "../../components/common/RadioGroup";
@@ -6,6 +6,9 @@ import { SortEnum, SortEnumMap } from "../../enums/Sort";
 import theme from "../../style/Theme";
 import { Option } from "../../components/common/types/Option";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../redux/reducers/ProductReducer";
+import { Store } from "../../redux";
 
 const Container = styled.div`
   display: flex;
@@ -72,6 +75,19 @@ const tagOptions: Option[] = [
 
 
 const ProductList: FunctionComponent<ProductListProps> = () => {
+
+  const dispatch = useDispatch();
+  const {list, loading} = useSelector((state: Store) => state.product);
+
+  useEffect(() => {
+    dispatch(getProducts());
+  }, [dispatch])
+
+
+  if(loading){
+    return <>Loading</>
+  }
+
   return (
       <Container>
           <FilterColumn>
@@ -101,11 +117,13 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
           <ListingColumn>
             <Title>Products</Title>
             <ProductListGrid>
-              {Array(30).fill(1).map(i => <ProductCard 
-                title="Deneme" 
-                price={213123} 
-                imgSrc="https://picsum.photos/200/300?random=2" id={1}
-                onSelect={() => console.log("Selected")}
+              {list.map(i => <ProductCard
+                key={i.name}
+                title={i.name} 
+                price={i.price} 
+                imgSrc="https://picsum.photos/200/300?random=2" 
+                id={i.name}
+                onSelect={() => console.log(i)}
                 />) }
               </ProductListGrid>
           </ListingColumn>

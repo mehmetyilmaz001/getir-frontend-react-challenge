@@ -5,7 +5,7 @@ import Button from "../common/Button/Button";
 import FormattedLabel from "../common/FormattedLabel/FormattedLabel";
 
 interface Product {
-  id: number;
+  id: any;
   title: string;
   imgSrc: string;
   price: number;
