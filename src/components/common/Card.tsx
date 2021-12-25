@@ -19,14 +19,15 @@ const Title = styled.span`
 
 interface CardProps {
     title?: string;
+    style?: React.CSSProperties;
 }
  
-const Card: FunctionComponent<CardProps> = ({children, title}) => {
+const Card: FunctionComponent<CardProps> = ({children, title, style}) => {
     return (
         
         <div>
             {title && <Title>{title}</Title>}
-            <Container>
+            <Container style={style}>
                 {children}
             </Container>
         </div>

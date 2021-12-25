@@ -1,10 +1,12 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import LookupReducer from "./reducers/LookupReducer";
 import ProductReducer from "./reducers/ProductReducer";
+import BasketReducer from "./reducers/BasketReducer";
 
 const store = configureStore({ reducer: {
     product: ProductReducer,
-    lookup: LookupReducer
+    lookup: LookupReducer,
+    basket: BasketReducer
 } });
 
 export type Store = ReturnType<typeof store.getState>;

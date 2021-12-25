@@ -1,7 +1,6 @@
 import { API_BRANDS_URL, API_ITEM_TYPES_URL, API_TAGS_URL } from './../../constants/api';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch, AppThunk } from "..";
-import {Option} from '../../components/common/types/Option';
 import { getDataAndDispatch } from '../../helpers/action';
 
 export type LookupReducerType = {

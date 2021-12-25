@@ -8,7 +8,7 @@ const Button = styled.button<{
     color: ${({customType}) => customType as string === "primary" ? "white" : theme.palette.text.primary};
     border: none;
     height: 32px;
-    min-width: 80px;
+    min-width: ${({customType}) => customType as string === "transparent" ? "30px" : "62px"};
     border-radius: 2px;
     cursor: pointer;
     font-size: 12px;

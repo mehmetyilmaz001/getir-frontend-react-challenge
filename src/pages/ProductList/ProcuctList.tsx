@@ -15,6 +15,8 @@ import FiltersWithLookup from "./components/Filters";
 import { Item } from "../../types/Item";
 import Skeleton from "react-loading-skeleton";
 import Pagination from "../../components/common/Pagination/Pagination";
+import BasketCard from "../../components/BasketCard/BasketCard";
+import { addOrIncreaseItem } from "../../redux/reducers/BasketReducer";
 
 
 const Container = styled.div`
@@ -64,6 +66,7 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
 
   const dispatch = useDispatch();
   const { data, loading, selectedItemType, pagination, selectedBrands, selectedSort, selectedTags } = useSelector((state: Store) => state.product);
+  const { items, total } = useSelector((state: Store) => state.basket);
   const {
     brands,
     tags,
@@ -82,8 +85,6 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
     dispatch(getItemTypes());
   }, [dispatch]);
 
-
-  const totalPages =  Math.ceil(pagination.count / pagination.pageSize);
 
   return (
     <Container>
@@ -123,7 +124,11 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
       
       </ListingColumn>
 
-      <BasketColumn>Basket</BasketColumn>
+      <BasketColumn>
+        <BasketCard data={
+          {items, total}
+        } />
+      </BasketColumn>
     </Container>
   );
 };
@@ -137,6 +142,8 @@ const ProductGrid: FunctionComponent<IProductGrid> = ({
   products,
   loading,
 }) => {
+  const dispatch = useDispatch();
+  
   const ProductSkeleton = () => {
     return (
       <>
@@ -167,7 +174,7 @@ const ProductGrid: FunctionComponent<IProductGrid> = ({
             price={i.price}
             imgSrc={`https://picsum.photos/200/300?random=${Math.random()}`}
             id={i.name}
-            onSelect={() => console.log(i)}
+            onSelect={() => dispatch(addOrIncreaseItem(i))}
           />
           
         )): <>No products found!</>}
