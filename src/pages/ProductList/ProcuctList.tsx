@@ -110,7 +110,7 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
 
         <ProductGrid products={data.items} loading={loading} />
 
-        {totalPages > 16 && 
+        {data.count > 16 && 
           <div style={{padding: 33}}>
           
           <Pagination 
