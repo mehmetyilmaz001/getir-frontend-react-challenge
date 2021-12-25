@@ -7,9 +7,9 @@ import { Option } from "./types/Option";
 interface SingleChoiceProps {
   title?: string;
   options: Option[];
-  onChange: (value: any) => void;
+  onChange: (value: Option) => void;
   type?: "radio" | "button";
-  value?: any;
+  value?: Option | null;
 }
 
 const RadioGroup: FunctionComponent<SingleChoiceProps> = ({
@@ -19,14 +19,20 @@ const RadioGroup: FunctionComponent<SingleChoiceProps> = ({
   type = "radio",
   value,
 }) => {
+
+  const _onChange = (option: Option) => {
+    onChange(option);
+  }
+
+
   if (type === "button") {
     return (
       <div style={{display: "flex", gap: 8}}>
         {options.map((i) => (
           <Button
             key={i.value}
-            customType={value === i.value ? "primary" : "secondary"}
-            onClick={() => onChange(i.value)}
+            customType={value && value.value === i.value ? "primary" : "secondary"}
+            onClick={() => _onChange(i)}
           >
             {i.label}
           </Button>
@@ -44,7 +50,8 @@ const RadioGroup: FunctionComponent<SingleChoiceProps> = ({
           name={title!}
           label={i.label}
           value={i.value}
-          onChange={onChange}
+          onChange={() => _onChange(i)}
+          checked={value !== null ? value!.value === i.value : false}
         />
       ))}
     </Card>

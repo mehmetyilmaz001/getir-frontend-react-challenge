@@ -9,6 +9,7 @@ interface CheckboxProps {
   onChange: (value: string) => void;
   value: string;
   direction?: "row" | "column";
+  checked?: boolean;
 }
 
 const Container = styled.div<{
@@ -30,14 +31,24 @@ const Checkbox: React.FunctionComponent<CheckboxProps> = ({
   onChange,
   value,
   direction,
+  checked,
 }) => {
+
+
+
+  // console.log("Checkbox => ", label , checked);
+  
+
   return (
     <Container direction={direction}>
       <StyledCheckBox
         id={id}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        checked={checked}
       />
+
+      {/* <input type={"checkbox"} id={id} value={value} onChange={(e) => onChange(e.target.value)} checked={checked} /> */}
       <label htmlFor={id}> {label}</label>
     </Container>
   );

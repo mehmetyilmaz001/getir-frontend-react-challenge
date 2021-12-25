@@ -1,95 +1,136 @@
-import { SortEnum, SortMapFunction } from './../../enums/Sort';
-import { Pagination } from './../../types/Pagination';
-import { API_ITEMS_URL } from './../../constants/api';
+import { SortEnum, SortMapFunction } from "./../../enums/Sort";
+import { Pagination } from "./../../types/Pagination";
+import { API_ITEMS_URL } from "./../../constants/api";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch, AppThunk } from "..";
 import { Item } from "../../types/Item";
+import { Option } from "../../components/common/types/Option";
 
-interface IPaginationData <T>{
+interface IPaginationData<T> {
   count: number;
-  items:T;
-}
-
-interface IFilter{
-  tags: string[];
-  brands: string[];
-  itemType: string | null;
-  sort: SortEnum | null;
+  items: T;
 }
 
 export type ProductReducerType = {
-    loading: boolean;
-    data: IPaginationData<Item[]>;
-    filter: IFilter;
-  };
-  
-  const initialState: ProductReducerType = {
-    loading: false,
-    data: {count: 0, items:[]},
-    filter: {
-      tags: [],
-      brands: [],
-      itemType: null,
-      sort: null
+  loading: boolean;
+  data: IPaginationData<Item[]>;
+  selectedItemType: Option | null;
+  selectedSort: Option | null;
+  selectedTags: Option[] | null;
+  selectedBrands: Option[] | null;
+  pagination: Pagination;
+};
+
+const initialState: ProductReducerType = {
+  loading: false,
+  data: { count: 0, items: [] },
+  selectedItemType: null,
+  selectedBrands: null,
+  selectedSort: null,
+  selectedTags: null,
+  pagination: { page: 1, pageSize: 16, count: 0 },
+};
+
+const product = createSlice({
+  name: "product",
+  initialState,
+  reducers: {
+    setData: (
+      state: ProductReducerType,
+      action: PayloadAction<IPaginationData<Item[]>>
+    ) => void (state.data = action.payload),
+    setLoading: (state: ProductReducerType, action: PayloadAction<boolean>) =>
+      void (state.loading = action.payload),
+    setSelectedItemType: (
+      state: ProductReducerType,
+      action: PayloadAction<Option | null>
+    ) => void (state.selectedItemType = action.payload),
+    setSelectedSort: (
+      state: ProductReducerType,
+      action: PayloadAction<Option | null>
+    ) => void (state.selectedSort = action.payload),
+    setSelectedTags: (
+      state: ProductReducerType,
+      action: PayloadAction<Option[] | null>
+    ) => void (state.selectedTags = action.payload),
+    setSelectedBrands: (
+      state: ProductReducerType,
+      action: PayloadAction<Option[] | null>
+    ) => void (state.selectedBrands = action.payload),
+  },
+});
+
+export const {
+  setLoading,
+  setData,
+  setSelectedItemType,
+  setSelectedSort,
+  setSelectedBrands,
+  setSelectedTags,
+} = product.actions;
+
+export const getProducts =
+  (): AppThunk => async (dispatch: AppDispatch, getState) => {
+    const {
+      selectedSort,
+      selectedTags,
+      selectedBrands,
+      selectedItemType,
+      pagination,
+    } = getState().product;
+
+    let queryParams = "";
+
+    if (selectedSort) {
+      const enumKey = selectedSort.value as SortEnum;
+      queryParams += SortMapFunction[enumKey];
     }
-  };
 
-
-  const product = createSlice({
-    name: "product",
-    initialState,
-    reducers: {
-      setData: (state: ProductReducerType, action: PayloadAction<IPaginationData<Item[]>>) => void (state.data = action.payload),
-      setLoading: (state: ProductReducerType, action: PayloadAction<boolean>) => void (state.loading = action.payload),
-      setFilter: (state: ProductReducerType, action: PayloadAction<IFilter> ) => void (state.filter = action.payload),
+    if (selectedTags && selectedTags.length > 0) {
+      queryParams += "&tags_like=" + selectedTags.map(i => i.value).join(",");
     }
-  });
 
-
-  export const {
-    setLoading,
-    setData,
-    setFilter
-  } = product.actions;
-
-  export const getProducts = (pagination: Pagination): AppThunk => async (dispatch: AppDispatch) => {
-    
-    try{
-        dispatch(setLoading(true));
-        const serviceRes = await fetch(`${API_ITEMS_URL}?_page=${pagination.page}&_limit=${pagination.pageSize}`);
-        const itemsJson = await serviceRes.json();
-        if(serviceRes.ok && serviceRes.status === 200){
-            
-            const data: IPaginationData<Item[]> = {
-              count: serviceRes.headers.get('X-Total-Count') ? parseInt(serviceRes.headers.get('X-Total-Count')!) : 0,
-              items: itemsJson
-            }
-            
-            dispatch(setData(data));
-        }
-        
-    }catch(e){
-        console.error(e);
-    }finally{
-        dispatch(setLoading(false));
+    if (selectedBrands && selectedBrands.length > 0) {
+      queryParams += "&manufacturer=" + selectedBrands.map(i => i.value).join("&manufacturer=");
     }
-  };
+
+    if (selectedItemType) {
+      queryParams += "&itemType=" + selectedItemType.value;
+    }
 
 
-  export const sortProducts = (sortParam: SortEnum): AppThunk => async (dispatch: AppDispatch, getState) => {
+    console.log(selectedBrands, selectedTags, queryParams);
     
-    const data = getState().product.data;
-    let items = [...data.items];
 
-    items.sort(SortMapFunction[sortParam]);
-    
-    dispatch(setLoading(true));
-    setTimeout(() => {
-      dispatch(setData({...data, items}));
+    try {
+      dispatch(setLoading(true));
+      const serviceRes = await fetch(
+        `${API_ITEMS_URL}?_page=${pagination.page}&_limit=${pagination.pageSize}${queryParams}`
+      );
+      const itemsJson = await serviceRes.json();
+      if (serviceRes.ok && serviceRes.status === 200) {
+        const data: IPaginationData<Item[]> = {
+          count: serviceRes.headers.get("X-Total-Count")
+            ? parseInt(serviceRes.headers.get("X-Total-Count")!)
+            : 0,
+          items: itemsJson,
+        };
+
+        dispatch(setData(data));
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
       dispatch(setLoading(false));
-    }, 500)
-    
-    
+    }
   };
 
-  export default product.reducer;
+
+export const clearFilters = () => (dispatch: AppDispatch) => {
+  dispatch(setSelectedItemType(null));
+  dispatch(setSelectedSort(null));
+  dispatch(setSelectedTags(null));
+  dispatch(setSelectedBrands(null));
+
+}
+export default product.reducer;

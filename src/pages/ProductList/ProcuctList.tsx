@@ -6,7 +6,7 @@ import theme from "../../style/Theme";
 import { Option } from "../../components/common/types/Option";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/reducers/ProductReducer";
+import { getProducts, setSelectedItemType } from "../../redux/reducers/ProductReducer";
 import { Store } from "../../redux";
 import {
   getBrands,
@@ -62,14 +62,14 @@ const Title = styled.h4`
 interface ProductListProps {}
 
 const ProductList: FunctionComponent<ProductListProps> = () => {
-  const [pagination, setPagination] = useState<Pagination>({
-    page: 1,
-    pageSize: 16,
-    count: 0,
-  });
+  // const [pagination, setPagination] = useState<Pagination>({
+  //   page: 1,
+  //   pageSize: 16,
+  //   count: 0,
+  // });
 
   const dispatch = useDispatch();
-  const { data, loading } = useSelector((state: Store) => state.product);
+  const { data, loading, selectedItemType, pagination, selectedBrands, selectedSort, selectedTags } = useSelector((state: Store) => state.product);
   const {
     brands,
     tags,
@@ -78,8 +78,8 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
   } = useSelector((state: Store) => state.lookup);
 
   useEffect(() => {
-    dispatch(getProducts(pagination));
-  }, [dispatch, pagination]);
+    dispatch(getProducts());
+  }, [dispatch, pagination, selectedBrands, selectedSort, selectedTags, selectedItemType]);
 
   useEffect(() => {
     dispatch(getTags());
@@ -94,6 +94,9 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
           brands={brands}
           tags={tags}
           loading={lookupLoading}
+          selectedBrands={selectedBrands}
+          selectedSort={selectedSort}
+          selectedTags={selectedTags}
         />
       </FilterColumn>
 
@@ -102,9 +105,9 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
 
         <RadioGroup
           type="button"
-          value={"mug"}
+          value={selectedItemType}
           options={itemTypes.map((i) => ({ label: i, value: i }))}
-          onChange={(itemType) => console.log("item type: ", itemType)}
+          onChange={(itemType) => dispatch(setSelectedItemType(itemType))}
         />
 
         <ProductGrid products={data.items} loading={loading} />

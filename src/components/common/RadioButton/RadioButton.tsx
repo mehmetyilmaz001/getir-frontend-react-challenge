@@ -9,10 +9,11 @@ export interface RadioButtonProps {
     onChange: (value: string) => void;
     value: string;
     direction?: 'row' | 'column';
+    checked?: boolean;
 }
 
  
-const RadioButton: React.FunctionComponent<RadioButtonProps> = ({id, name, label, value, onChange, direction = 'row'}) => {
+const RadioButton: React.FunctionComponent<RadioButtonProps> = ({id, name, label, value, onChange, direction = 'row', checked}) => {
     return ( 
         <Container direction={direction}>
             <StyledRadioButton 
@@ -21,6 +22,7 @@ const RadioButton: React.FunctionComponent<RadioButtonProps> = ({id, name, label
                 name={name} 
                 value={value} 
                 onChange={(event) => onChange(event!.target.value)}
+                checked={checked}
             />
             <label htmlFor={id}>{label}</label>
         </Container>

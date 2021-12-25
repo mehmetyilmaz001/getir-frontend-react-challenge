@@ -1,5 +1,3 @@
-import { Item } from "../types/Item"
-
 export enum SortEnum  {
     PRIRCE_LOW_TO_HIGH,
     PRIRCE_HIGH_TO_LOW,
@@ -15,8 +13,8 @@ export const SortEnumMap = {
 }
 
 export const SortMapFunction = {
-    [SortEnum.PRIRCE_LOW_TO_HIGH]: (a: Item, b:Item) => a.price - b.price,
-    [SortEnum.PRIRCE_HIGH_TO_LOW]: (a:Item, b:Item) => b.price - a.price,
-    [SortEnum.NEW_TO_OLD]: (a:Item, b:Item) => a.added - b.added,
-    [SortEnum.OLD_TO_NEW]: (a:Item, b:Item) => b.added - a.added
+    [SortEnum.PRIRCE_LOW_TO_HIGH]: "&_sort=price&_order=asc",
+    [SortEnum.PRIRCE_HIGH_TO_LOW]: "&_sort=price&_order=desc",
+    [SortEnum.NEW_TO_OLD]: "&_sort=added&_order=asc",
+    [SortEnum.OLD_TO_NEW]: "&_sort=added&_order=desc"
 }

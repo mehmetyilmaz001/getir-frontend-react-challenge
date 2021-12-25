@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 import useDidUpdate from "../../hooks/useDidUpdate";
@@ -10,9 +10,10 @@ import { Option } from "./types/Option";
 interface CheckboxGroupProps {
   title: string;
   options: Option[];
-  onChange: (value: any) => void;
+  onChange: (value: Option[]) => void;
   hasSearch?: boolean;
   searchPlaceholder?: string;
+  value?: Option[] | null;
 }
 
 const OptionsContiner = styled.div`
@@ -29,21 +30,24 @@ const CheckboxGroup: FunctionComponent<CheckboxGroupProps> = ({
   onChange,
   hasSearch,
   searchPlaceholder,
+  value
 }) => {
 
 
-  const [_options, setOptions] = useState<Option[]>([]);
+  const [_options, setOptions] = useState<Option[]>([...options]);
   const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
 
-  useEffect(() => {
+  useDidUpdate(() => {
     setOptions([...options])
-  }, [options])
+    console.log("useDidUpdate callad", options.length);
+  }, [options.length])
   
   useDidUpdate(() => {
     onChange(selectedOptions);
+    
   }, [selectedOptions])
 
-  const _onFilter = (searchTerm: string) => {
+  const _onFilter = useCallback( (searchTerm: string) => {
     if (searchTerm === "") {
       setOptions([...options]);
     }
@@ -53,13 +57,15 @@ const CheckboxGroup: FunctionComponent<CheckboxGroupProps> = ({
         option.label.toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
-  };
+  }, [options])
 
 
-  const _onSelect = (option: Option) => {
+  const _onSelect = useCallback((option: Option) => {
     const found = selectedOptions.find((i) => i.value === option.value);
     setSelectedOptions( found ? selectedOptions.filter((i) => i.value !== option.value) : [...selectedOptions, option])
-  }
+  }, [selectedOptions]);
+
+  // console.log("checkbox group => ", value);
 
 
   return (
@@ -80,6 +86,7 @@ const CheckboxGroup: FunctionComponent<CheckboxGroupProps> = ({
             label={i.label}
             value={i.value}
             onChange={() => _onSelect(i)}
+            checked={ value ? value!.some((j) => j.value === i.value) : false}
           />
         ))}
       </OptionsContiner>
