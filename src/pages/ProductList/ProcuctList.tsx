@@ -1,22 +1,21 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect } from "react";
 import styled from "styled-components";
 import RadioGroup from "../../components/common/RadioGroup";
-import { SortEnum, SortEnumMap } from "../../enums/Sort";
 import theme from "../../style/Theme";
-import { Option } from "../../components/common/types/Option";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, setSelectedItemType } from "../../redux/reducers/ProductReducer";
+import { getProducts, setPagination, setSelectedItemType } from "../../redux/reducers/ProductReducer";
 import { Store } from "../../redux";
 import {
   getBrands,
   getItemTypes,
   getTags,
 } from "../../redux/reducers/LookupReducer";
-import { Pagination } from "../../types/Pagination";
 import FiltersWithLookup from "./components/Filters";
 import { Item } from "../../types/Item";
 import Skeleton from "react-loading-skeleton";
+import Pagination from "../../components/common/Pagination/Pagination";
+
 
 const Container = styled.div`
   display: flex;
@@ -62,11 +61,6 @@ const Title = styled.h4`
 interface ProductListProps {}
 
 const ProductList: FunctionComponent<ProductListProps> = () => {
-  // const [pagination, setPagination] = useState<Pagination>({
-  //   page: 1,
-  //   pageSize: 16,
-  //   count: 0,
-  // });
 
   const dispatch = useDispatch();
   const { data, loading, selectedItemType, pagination, selectedBrands, selectedSort, selectedTags } = useSelector((state: Store) => state.product);
@@ -79,13 +73,17 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
 
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch, pagination, selectedBrands, selectedSort, selectedTags, selectedItemType]);
+  }, [dispatch, pagination.page, selectedBrands, selectedSort, selectedTags, selectedItemType]);
+
 
   useEffect(() => {
     dispatch(getTags());
     dispatch(getBrands());
     dispatch(getItemTypes());
   }, [dispatch]);
+
+
+  const totalPages =  Math.ceil(pagination.count / pagination.pageSize);
 
   return (
     <Container>
@@ -111,6 +109,18 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
         />
 
         <ProductGrid products={data.items} loading={loading} />
+
+        {totalPages > 16 && 
+          <div style={{padding: 33}}>
+          
+          <Pagination 
+            totalPages={Math.ceil(pagination.count / pagination.pageSize)} 
+            activePage={pagination.page} 
+            onChange={(page: number) => dispatch(setPagination({...pagination, page}))} />
+
+         </div>
+        }
+      
       </ListingColumn>
 
       <BasketColumn>Basket</BasketColumn>
@@ -149,16 +159,21 @@ const ProductGrid: FunctionComponent<IProductGrid> = ({
       {loading ? (
         <ProductSkeleton />
       ) : (
-        products.map((i) => (
+        <>
+       { products.length > 0 ? products.map((i) => (
           <ProductCard
             key={i.name}
             title={i.name}
             price={i.price}
-            imgSrc="https://picsum.photos/200/300?random=2"
+            imgSrc={`https://picsum.photos/200/300?random=${Math.random()}`}
             id={i.name}
             onSelect={() => console.log(i)}
           />
-        ))
+          
+        )): <>No products found!</>}
+
+        
+        </>
       )}
     </Grid>
   );

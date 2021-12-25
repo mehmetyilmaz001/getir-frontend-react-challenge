@@ -4,7 +4,8 @@ export const colors = {
   blue1: "#1EA4CE",
   blue2: "#147594",
   gray1: "#525252",
-  gray2: "#E0E0E0"
+  gray2: "#E0E0E0",
+  gray3: "#697488"
 }
 const theme = {
   color: {
@@ -14,12 +15,20 @@ const theme = {
     primary: {
       main: colors.blue1,
       light: colors.white1,
-      hover: colors.blue2,
+      hover: colors.gray2,
       active: colors.gray2,
       activeTextColor: colors.white,
     },
     secondary: {
       main: colors.white1,
+      light: colors.white1,
+      hover: colors.gray2,
+      active: colors.gray1,
+      activeTextColor: colors.white,
+    },
+    transparent: {
+      main: "transparent",
+      light: colors.white1,
       hover: colors.gray2,
       active: colors.gray1,
       activeTextColor: colors.white,
@@ -27,6 +36,9 @@ const theme = {
     accent: {
       main: colors.blue2,
       light: colors.white1,
+      hover: colors.gray2,
+      active: colors.gray1,
+      activeTextColor: colors.white,
     },
    
     attention: {
@@ -34,6 +46,7 @@ const theme = {
       light: "#F04A4A",
       dark: "#BD3A3A",
     },
+    disabled: colors.gray3,
     border: { main: colors.gray2 },
     background: {
       body: "#FAFAFA",

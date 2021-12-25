@@ -1,5 +1,5 @@
 import { SortEnum, SortMapFunction } from "./../../enums/Sort";
-import { Pagination } from "./../../types/Pagination";
+import { PaginationType } from "../../types/PaginationType";
 import { API_ITEMS_URL } from "./../../constants/api";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch, AppThunk } from "..";
@@ -18,7 +18,7 @@ export type ProductReducerType = {
   selectedSort: Option | null;
   selectedTags: Option[] | null;
   selectedBrands: Option[] | null;
-  pagination: Pagination;
+  pagination: PaginationType;
 };
 
 const initialState: ProductReducerType = {
@@ -28,7 +28,7 @@ const initialState: ProductReducerType = {
   selectedBrands: null,
   selectedSort: null,
   selectedTags: null,
-  pagination: { page: 1, pageSize: 16, count: 0 },
+  pagination: { page: 0, pageSize: 16, count: 0 },
 };
 
 const product = createSlice({
@@ -57,6 +57,10 @@ const product = createSlice({
       state: ProductReducerType,
       action: PayloadAction<Option[] | null>
     ) => void (state.selectedBrands = action.payload),
+    setPagination: (
+      state: ProductReducerType,
+      action: PayloadAction<PaginationType>
+    ) => void (state.pagination = action.payload),
   },
 });
 
@@ -67,6 +71,7 @@ export const {
   setSelectedSort,
   setSelectedBrands,
   setSelectedTags,
+  setPagination
 } = product.actions;
 
 export const getProducts =
@@ -109,14 +114,14 @@ export const getProducts =
       );
       const itemsJson = await serviceRes.json();
       if (serviceRes.ok && serviceRes.status === 200) {
+
+        const totalCount = serviceRes.headers.get("X-Total-Count")!;
         const data: IPaginationData<Item[]> = {
-          count: serviceRes.headers.get("X-Total-Count")
-            ? parseInt(serviceRes.headers.get("X-Total-Count")!)
-            : 0,
+          count: totalCount ? parseInt(totalCount!) : 0,
           items: itemsJson,
         };
-
         dispatch(setData(data));
+        dispatch(setPagination({...pagination, count: data.count}))
       }
     } catch (e) {
       console.error(e);

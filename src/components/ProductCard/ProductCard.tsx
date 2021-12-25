@@ -48,6 +48,7 @@ const Price = styled(FormattedLabel)`
 const Title = styled.h4`
     font-size: 14px;
     color: ${theme.palette.text.primary};
+    font-weight: 600;
     margin:0;
 `;    
 
