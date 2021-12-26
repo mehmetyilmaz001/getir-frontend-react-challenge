@@ -1,9 +1,38 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import configureStore from "redux-mock-store";
+import { Provider } from "react-redux";
+import renderer from 'react-test-renderer';
+import App from './App';  
+import { mockBaskeCardStore, mockBasketItem } from "./components/BasketCard/MockStore";
+const mockStore = configureStore([]);
 
-test('renders learn react link', () => {
-  // render(<App />);
-  // const linkElement = screen.getByText(/learn react/i);
-  // expect(linkElement).toBeInTheDocument();
+test('App render test', () => {
+  let store;
+  let component: any;
+
+    store = mockStore({
+       root: {
+          isTabletOrMobile: false,
+       },
+        basket: {
+          ...mockBaskeCardStore
+        },
+        product: {
+           data: {count: 0, items: [mockBasketItem]},
+           pagination: {
+             page:1
+           }
+        },
+        lookup: {
+          itemTypes: [],
+        }
+    });
+
+    component = renderer.create(
+        <Provider store={store}>
+          <App />
+        </Provider>
+      );
+ 
+
+  expect(component!.toJSON()).toMatchSnapshot();
 });

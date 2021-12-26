@@ -1,7 +1,6 @@
 import { Basket, BasketItem } from './../../types/Basket';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch, AppThunk } from '..';
-import { Item } from '../../types/Item';
   
 const initialState: Basket = {
     items: [],

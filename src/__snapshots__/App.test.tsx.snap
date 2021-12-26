@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App render test 1`] = `
+Array [
+  <header
+    className="sc-fotOHu gucLTB"
+  >
+    <div
+      className="sc-fFeiMQ jBBNPc"
+    >
+      <img
+        alt="Market"
+        className="logo"
+        src="SvgrURL"
+      />
+      <div
+        className="sc-bkkeKt yCKlF"
+        onClick={[Function]}
+        role=""
+      >
+        <div
+          className="sc-gsDKAQ kuDbVK"
+        >
+          <div />
+          <span>
+            ₺2.222,00
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>,
+  <div
+    className="sc-dlVxhl gNIAFh"
+  >
+    <div
+      className="sc-llYSUQ bQnqyq"
+    >
+      <div
+        className="sc-giYglK kZlJtp listing-column"
+      >
+        <h4
+          className="sc-kLwhqv gnhWUy"
+        >
+          Products
+        </h4>
+        <div
+          style={
+            Object {
+              "display": "flex",
+              "gap": 8,
+            }
+          }
+        />
+        <div
+          className="sc-bYoBSM kLLIaJ"
+          role="grid"
+        >
+          <div
+            className="sc-jJoQJp ieUIdf"
+          >
+            <img
+              alt="test"
+              className="sc-hiCibw gYKVcb"
+              loading="lazy"
+              src="https://picsum.photos/200/300?random=0.012096342240646818"
+            />
+            <span
+              className="sc-gWXbKe kouSY"
+            >
+              ₺111,00
+            </span>
+            <h4
+              className="sc-cCcXHH goTrCj"
+            >
+              test
+            </h4>
+            <button
+              className="sc-eCImPb kWJqWx"
+              onClick={[Function]}
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <footer
+    className="sc-bdvvtL ihGqeD"
+  >
+    ©
+    2021
+     Market 
+    <span
+      style={
+        Object {
+          "fontSize": "24px",
+          "fontWeight": "bold",
+          "margin": "0 16px",
+        }
+      }
+    >
+      ·
+    </span>
+     Privacy Policy
+  </footer>,
+]
+`;
