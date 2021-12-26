@@ -14,7 +14,15 @@ function formatMyMoney(price: number) {
   
 
 interface FormattedLabelProps {
+
+    /**
+     * The price value for formatting
+     */ 
     price: number;
+
+    /**
+     * The className of the component for styling
+     */ 
     className?: string;
 }
 

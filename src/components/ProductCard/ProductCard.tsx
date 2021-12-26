@@ -7,12 +7,29 @@ import FormattedLabel from "../common/FormattedLabel/FormattedLabel";
 
 interface Product {
   id: any;
+
+   /**
+   * The title of the product
+   */
   title: string;
+
+
+  /**
+   * The image source url of the product
+   */ 
   imgSrc: string;
+
+  /**
+   * The price of the product
+   */
   price: number;
 }
 
 interface ProductCardProps extends Product {
+
+   /**
+   * The function to be called when the product is selected for adding to the basket
+   */
   onSelect: () => void;
 }
 
@@ -51,8 +68,11 @@ const Title = styled.h4`
     color: ${theme.palette.text.primary};
     font-weight: 600;
     margin:0;
-`;    
+`; 
 
+/**
+ * Resuable component for displaying a single product
+ */
 const ProductCard: FunctionComponent<ProductCardProps> = ({imgSrc, title, price, onSelect}) => {
   return <Container>
         <Picture src={imgSrc} loading="lazy" alt={title} />

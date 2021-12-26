@@ -24,6 +24,10 @@ const TotalContainer = styled.div`
     height: 51px;
 `
  
+
+/**
+ * Resuable component for displaying a basket which is connected to the redux store
+ */
 const BasketCard: React.FunctionComponent<BasketCardProps> = () => {
     
     const { items } = useSelector((state: Store) => state.basket);

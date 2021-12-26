@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import styled from "styled-components";
 import theme from "../../style/Theme";
 
@@ -10,6 +10,9 @@ const StyledFooter = styled.footer`
   ${theme.typography.footer};
 `;
 
+/**
+ * The footer component for the application
+ */ 
 const Footer: FunctionComponent = () => {
   return (
     <StyledFooter>

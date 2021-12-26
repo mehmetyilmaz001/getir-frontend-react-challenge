@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import theme from '../../../style/Theme';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+
+    /**
+     * The string value of the input
+     */  
     label?: string;
 }
 

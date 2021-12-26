@@ -21,6 +21,9 @@ const CloseButton = styled(Button)`
 `;
 
 interface ModalProps {
+    /**
+     * The function to be called when the modal is closed
+     */ 
     onClose?: () => void;
     className?: string;
 }

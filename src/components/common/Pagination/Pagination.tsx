@@ -78,8 +78,19 @@ const StyledPagination = styled(ReactPaginate)<{
 `;
 
 interface PaginationProps {
+  /**
+   * The active page number which is used to determine which page is selected
+   */  
   activePage: number;
+
+  /**
+   * The total number of pages
+   */
   totalPages: number;
+
+  /**
+   * The function to be called when the page is selected
+   */ 
   onChange: (page: number) => void;
 }
 
@@ -141,7 +152,7 @@ const NextPrevButton: FunctionComponent<INextPrevButton> = ({
     font-weight: bold;
     font-size: 14px;
     color: ${color};
-    :user-select: none;
+    user-select: none;
 
     ${mq("mobile")} {
       font-size: 11px;

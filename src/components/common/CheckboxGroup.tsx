@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { FunctionComponent, useState } from "react";
 import styled from "styled-components";
 import useDidUpdate from "../../hooks/useDidUpdate";
@@ -8,11 +8,34 @@ import Input from "./Input/Input";
 import { Option } from "./types/Option";
 
 interface CheckboxGroupProps {
+  /**
+   * The title of the panel of group
+   */ 
   title: string;
+
+  /**
+   * The options of the checkbox group
+   */ 
   options: Option[];
+
+  /**
+   * The function to be called when the checkbox is selected
+   */  
   onChange: (value: Option[]) => void;
+
+  /**
+   * The boolean value for displaying search input
+   */ 
   hasSearch?: boolean;
+
+  /**
+   * The string value of search input place holder
+   */ 
   searchPlaceholder?: string;
+
+  /**
+   * Set of selected values
+   */  
   value?: Option[] | null;
 }
 

@@ -18,7 +18,14 @@ const Title = styled.span`
 `
 
 interface CardProps {
+    /**
+     * The title of the panel
+     */
     title?: string;
+
+    /**
+     * The object for component styling
+     */ 
     style?: React.CSSProperties;
 }
  

@@ -78,6 +78,9 @@ const FilterCardModal = styled(Modal)`
   left: 5px;
 `;
 
+/**
+ * A component that renders the header of the application
+ */
 const Header: FunctionComponent<HeaderProps> = () => {
   const [basketVisibility, setBasketVisibility] =
     React.useState<boolean>(false);

@@ -88,6 +88,9 @@ const PaginationContainer = styled.div`
 
 interface ProductListProps {}
 
+/**
+ * A component that displays a list of products
+ */
 const ProductList: FunctionComponent<ProductListProps> = () => {
   const dispatch = useDispatch();
   const {
@@ -101,10 +104,7 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
   } = useSelector((state: Store) => state.product);
 
   const {
-    brands,
-    tags,
     itemTypes,
-    loading: lookupLoading,
   } = useSelector((state: Store) => state.lookup);
 
   const { isDesktopOrLaptop, isTabletOrMobile } = useSelector((s: Store) => s.root);
@@ -205,6 +205,7 @@ const ProductGrid: FunctionComponent<IProductGrid> = React.memo(
 
     return (
       <Grid>
+        
         {loading ? (
           <ProductSkeleton />
         ) : (

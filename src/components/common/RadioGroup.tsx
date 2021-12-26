@@ -6,11 +6,34 @@ import RadioButton from "./RadioButton/RadioButton";
 import { Option } from "./types/Option";
 
 interface RadioGroupProps {
+  /**
+   * The title of the panel of group
+   */ 
   title?: string;
+
+  /**
+   * The options of the radio group 
+   */ 
   options: Option[];
+
+  /**
+   * The function to be called when the radio is selected
+   */  
   onChange: (value: Option) => void;
+
+  /**
+   * Render the radio button as a button
+   */ 
   type?: "radio" | "button";
+
+  /**
+   * The value of the radio button
+   */ 
   value?: Option | null;
+
+  /**
+   * The option for rendering radio group as a combobox
+   */ 
   showAsCombobox?: boolean;
 }
 

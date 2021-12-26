@@ -5,10 +5,29 @@ import StyledCheckBox from "./components/StyledCheckbox";
 
 interface CheckboxProps {
   id: string;
+  /**
+   * The label of the checkbox
+   */ 
   label: string;
+
+  /**
+   * The function to be called when the checkbox is selected
+   */ 
   onChange: (value: string) => void;
+  
+  /**
+   * The value of the checkbox
+   */ 
   value: string;
+
+  /**
+   * The direction of the checkbox which can be either 'row' or 'column'
+   */ 
   direction?: "row" | "column";
+
+  /**
+   * The checked state of the checkbox
+   */ 
   checked?: boolean;
 }
 
@@ -32,12 +51,7 @@ const Checkbox: React.FunctionComponent<CheckboxProps> = ({
   value,
   direction,
   checked,
-}) => {
-
-
-
-  // console.log("Checkbox => ", label , checked);
-  
+}) => {  
 
   return (
     <Container direction={direction}>

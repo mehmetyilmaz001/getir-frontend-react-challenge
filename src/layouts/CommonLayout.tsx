@@ -15,6 +15,9 @@ const ContentContainer = styled.div`
   }
 `;
 
+/**
+ * A common layout for all pages.
+ */
 const CommonLayout: FunctionComponent = ({ children }) => {
   return (
     <>
