@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import mainThememe from '../../../../style/Theme';
 import FormattedLabel from '../../../common/FormattedLabel/FormattedLabel';
-import { ReactComponent as BasketIcon } from '../../../assets/basket-icon.svg';
+import { ReactComponent as BasketIcon } from '../../../../assets/basket-icon.svg';
 import { useSelector } from 'react-redux';
 import { Store } from '../../../../redux';
 import { mq } from '../../../../style/Mixins';

@@ -19,6 +19,7 @@ export type ProductReducerType = {
   selectedTags: Option[] | null;
   selectedBrands: Option[] | null;
   pagination: PaginationType;
+  hasError: boolean;
 };
 
 const initialState: ProductReducerType = {
@@ -29,6 +30,7 @@ const initialState: ProductReducerType = {
   selectedSort: null,
   selectedTags: null,
   pagination: { page: 0, pageSize: 16, count: 0 },
+  hasError: false,
 };
 
 const product = createSlice({
@@ -61,6 +63,10 @@ const product = createSlice({
       state: ProductReducerType,
       action: PayloadAction<PaginationType>
     ) => void (state.pagination = action.payload),
+    setHasError: (
+      state: ProductReducerType,
+      action: PayloadAction<boolean>
+    ) => void (state.hasError = action.payload),
   },
 });
 
@@ -71,7 +77,8 @@ export const {
   setSelectedSort,
   setSelectedBrands,
   setSelectedTags,
-  setPagination
+  setPagination,
+  setHasError
 } = product.actions;
 
 export const getProducts =
@@ -102,9 +109,6 @@ export const getProducts =
     if (selectedItemType) {
       queryParams += "&itemType=" + selectedItemType.value;
     }
-
-
-    console.log(selectedBrands, selectedTags, queryParams);
     
 
     try {
@@ -122,9 +126,11 @@ export const getProducts =
         };
         dispatch(setData(data));
         dispatch(setPagination({...pagination, count: data.count}))
+        dispatch(setHasError(false));
       }
     } catch (e) {
       console.error(e);
+      dispatch(setHasError(true));
     } finally {
       dispatch(setLoading(false));
     }

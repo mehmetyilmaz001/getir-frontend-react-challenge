@@ -36,6 +36,7 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
     selectedBrands,
     selectedSort,
     selectedTags,
+    hasError
   } = useSelector((state: Store) => state.product);
 
   const {
@@ -85,7 +86,9 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
           onChange={(itemType) => dispatch(setSelectedItemType(itemType))}
         />
 
-        <ProductGrid products={data.items} loading={loading} />
+        {hasError ? <div>Something went wrong!</div> :  
+          <ProductGrid products={data.items} loading={loading} />
+        }
 
         {data.count > 16 && (
           <PaginationContainer>
