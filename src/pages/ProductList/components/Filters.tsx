@@ -1,48 +1,30 @@
 import * as React from "react";
 import Skeleton from "react-loading-skeleton";
 import CheckboxGroup from "../../../components/common/CheckboxGroup";
-import RadioGroup from "../../../components/common/RadioGroup";
-import { SortEnum, SortEnumMap } from "../../../enums/Sort";
 import { Option } from "../../../components/common/types/Option";
 import Card from "../../../components/common/Card";
-import { useDispatch } from "react-redux";
-import { clearFilters, setSelectedBrands, setSelectedSort, setSelectedTags } from "../../../redux/reducers/ProductReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { clearFilters, setSelectedBrands, setSelectedTags } from "../../../redux/reducers/ProductReducer";
 import Button from "../../../components/common/Button/Button";
-
-
-const sortOptions: Option[] = Object.keys(SortEnumMap).map((i: string) => {
-  const value = i as unknown as SortEnum;
-  return { value, label: SortEnumMap[value] };
-});
+import { Store } from "../../../redux";
 
 interface IFiltersWithLookup {
-  brands: string[];
-  tags: string[];
-  selectedBrands: Option[] | null;
-  selectedSort:Option | null; 
-  selectedTags:Option[] | null;
-  loading: boolean;
 }
 
-const FiltersWithLookup: React.FunctionComponent<IFiltersWithLookup> = ({
-  tags,
-  brands,
-  loading,
-  selectedBrands,
-  selectedSort,
-  selectedTags
-}) => {
+const FiltersWithLookup: React.FunctionComponent<IFiltersWithLookup> = () => {
 
   const dispatch = useDispatch();
 
+  const {
+    selectedBrands,
+    selectedTags,
+  } = useSelector((state: Store) => state.product);
 
-  // console.log("FiltersWithLookup render", tags,
-  // brands,
-  // loading,
-  // selectedBrands,
-  // selectedSort,
-  // selectedTags,);
-  
+  const {
+    brands,
+    tags,
+    loading,
+  } = useSelector((state: Store) => state.lookup);
 
   const SkeletonList = React.memo(() => {
     return (
@@ -67,14 +49,7 @@ const FiltersWithLookup: React.FunctionComponent<IFiltersWithLookup> = ({
   }
 
   return (
-    <>
-      <RadioGroup
-        title="Sort"
-        options={sortOptions}
-        value={selectedSort}
-        onChange={(sort: Option) => dispatch(setSelectedSort(sort))}
-        
-      />
+    <div>
       <CheckboxGroup
         title="Brands"
         options={brands.map((i: string) => ({ value: i, label: i }))}
@@ -94,8 +69,8 @@ const FiltersWithLookup: React.FunctionComponent<IFiltersWithLookup> = ({
       />
 
       <Button customType="primary" onClick={() => dispatch(clearFilters())}>Clear Filters</Button>
-    </>
-  );
+    </div>
+  )
 };
 
 export default React.memo(FiltersWithLookup);

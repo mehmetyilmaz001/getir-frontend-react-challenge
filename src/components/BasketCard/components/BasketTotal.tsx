@@ -5,6 +5,7 @@ import FormattedLabel from '../../common/FormattedLabel/FormattedLabel';
 import { ReactComponent as BasketIcon } from '../../../assets/basket-icon.svg';
 import { useSelector } from 'react-redux';
 import { Store } from '../../../redux';
+import { mq } from '../../../style/Mixins';
 
 
 interface BasketTotalProps {
@@ -24,7 +25,11 @@ const Total = styled.div<{
     background-color: ${({theme}) => theme === 'light' ? mainThememe.palette.primary.text : mainThememe.palette.accent.main};
     font-size: 14px;
     font-weight: 600;
-    gap: 13px
+    gap: 13px;
+
+    ${mq('mobile')} {
+       flex-direction : column;
+    }
 `;
  
 export const BasketTotal: React.FunctionComponent<BasketTotalProps> = ({showBasketIcon, theme}) => {

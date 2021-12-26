@@ -8,8 +8,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 
 const StyledInput = styled.input<InputProps>`
-    border: 2px solid ${theme.palette.border.main};
-    height: 48px;
+    ${theme.input.main};
     width: 100%;
     padding: 12px 16px;
     outline: none;

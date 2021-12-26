@@ -15,6 +15,9 @@ const theme = {
   desktop: {
     containerSize: "80%"
   },
+  mobile: {
+    containerSize: "98%"
+  },
   palette: {
     primary: {
       main: colors.blue1,
@@ -66,11 +69,19 @@ const theme = {
       placeholder: colors.gray2
     },
   },
+  input: {
+    main: {
+      border: `2px solid ${colors.gray2}`,
+      height: "48px",
+      backgroundColor: 'white'
+    }
+  },
   spacing: (multiplier = 1) => `${4 * multiplier}px`,
   formItemSpace: "18px",
   borderRadius: "2px",
   shadow: {
     elevation1: { "box-shadow": "0px 6px 24px rgba(93, 62, 188, 0.04)" },
+    elevation3: { "box-shadow": "0px 6px 24px rgba(93, 62, 188, 0.50)" },
   },
   transition1: 'transition: all 0.2s ease;',
 

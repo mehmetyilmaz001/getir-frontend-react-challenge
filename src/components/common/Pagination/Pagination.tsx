@@ -4,6 +4,7 @@ import { ReactComponent as RightArrow } from "../assets/arrow-right.svg";
 import theme, { colors } from "../../../style/Theme";
 import styled from "styled-components";
 import ReactPaginate from "react-paginate";
+import { mq } from "../../../style/Mixins";
 
 const StyledPagination = styled(ReactPaginate)<{
     isAtTheFirstPage: boolean;
@@ -27,6 +28,10 @@ const StyledPagination = styled(ReactPaginate)<{
     cursor: pointer;
     border-radius: 2px;
 
+    ${mq("mobile")} {
+      font-size: 11px;
+    }
+
     a {
       display: flex;
       justify-content: center;
@@ -38,18 +43,27 @@ const StyledPagination = styled(ReactPaginate)<{
     }
 
     &.previous {
-        margin-right: 50px;
+        margin-right: 40px;
 
         > a {
             cursor: ${({isAtTheFirstPage}) => isAtTheFirstPage ? 'not-allowed': 'pointer'};
         }
     }
     &.next {
-        margin-left: 50px;
+        margin-left: 40px;
 
         > a {
             cursor: ${({isAtTheLastPage}) => isAtTheLastPage ? 'not-allowed': 'pointer'};
         }
+    }
+
+    ${mq("mobile")} {
+      &.previous {
+        margin-right: 10px;
+      }
+      &.next {
+        margin-left: 10px;
+      }
     }
 
     &:hover {
@@ -128,6 +142,10 @@ const NextPrevButton: FunctionComponent<INextPrevButton> = ({
     font-size: 14px;
     color: ${color};
     :user-select: none;
+
+    ${mq("mobile")} {
+      font-size: 11px;
+    }
   `;
 
   return (

@@ -2,8 +2,10 @@ import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import LookupReducer from "./reducers/LookupReducer";
 import ProductReducer from "./reducers/ProductReducer";
 import BasketReducer from "./reducers/BasketReducer";
+import RootReducer from "./reducers/RootReducer";
 
 const store = configureStore({ reducer: {
+    root: RootReducer,
     product: ProductReducer,
     lookup: LookupReducer,
     basket: BasketReducer

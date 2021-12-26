@@ -22,6 +22,8 @@ import Pagination from "../../components/common/Pagination/Pagination";
 import BasketCard from "../../components/BasketCard/BasketCard";
 import { addOrIncreaseItem } from "../../redux/reducers/BasketReducer";
 import React from "react";
+import { mq } from "../../style/Mixins";
+import Sort from "./components/Sort";
 
 const Container = styled.div`
   display: flex;
@@ -41,6 +43,10 @@ const ListingColumn = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${theme.spacing(4)};
+
+  ${mq("mobile")} {
+    padding: 10px;
+  }
 `;
 
 const BasketColumn = styled.div`
@@ -55,6 +61,14 @@ const Grid = styled.div`
   background: #ffffff;
   box-shadow: 0px 4px 24px rgba(93, 62, 188, 0.04);
   border-radius: 2px;
+
+  ${mq("mobile")} {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  ${mq("tablet")} {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 `;
 
 const Title = styled.h4`
@@ -62,6 +76,14 @@ const Title = styled.h4`
   font-size: 20px;
   margin-top: 0;
   margin-bottom: 0;
+`;
+
+const PaginationContainer = styled.div`
+  padding: 33px;
+
+  ${mq("mobile")} {
+    padding: 5px;
+  }
 `;
 
 interface ProductListProps {}
@@ -77,13 +99,15 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
     selectedSort,
     selectedTags,
   } = useSelector((state: Store) => state.product);
-  
+
   const {
     brands,
     tags,
     itemTypes,
     loading: lookupLoading,
   } = useSelector((state: Store) => state.lookup);
+
+  const { isDesktopOrLaptop, isTabletOrMobile } = useSelector((s: Store) => s.root);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -104,18 +128,19 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
 
   return (
     <Container>
-      <FilterColumn>
-        <FiltersWithLookup
-          brands={brands}
-          tags={tags}
-          loading={lookupLoading}
-          selectedBrands={selectedBrands}
-          selectedSort={selectedSort}
-          selectedTags={selectedTags}
-        />
-      </FilterColumn>
+      {isDesktopOrLaptop && (
+        <FilterColumn>
+          <Sort />
+          <FiltersWithLookup/>
+        </FilterColumn>
+      )}
 
-      <ListingColumn>
+      <ListingColumn className="listing-column">
+
+        {isTabletOrMobile && 
+           <Sort />
+        }
+
         <Title>Products</Title>
 
         <RadioGroup
@@ -128,7 +153,7 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
         <ProductGrid products={data.items} loading={loading} />
 
         {data.count > 16 && (
-          <div style={{ padding: 33 }}>
+          <PaginationContainer>
             <Pagination
               totalPages={Math.ceil(pagination.count / pagination.pageSize)}
               activePage={pagination.page}
@@ -136,13 +161,15 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
                 dispatch(setPagination({ ...pagination, page }))
               }
             />
-          </div>
+          </PaginationContainer>
         )}
       </ListingColumn>
 
-      <BasketColumn>
-        <BasketCard />
-      </BasketColumn>
+      {isDesktopOrLaptop && (
+        <BasketColumn>
+          <BasketCard />
+        </BasketColumn>
+      )}
     </Container>
   );
 };
@@ -152,60 +179,55 @@ interface IProductGrid {
   loading: boolean;
 }
 
-const ProductGrid: FunctionComponent<IProductGrid> = React.memo( ({
-  products,
-  loading,
-}) => {
+const ProductGrid: FunctionComponent<IProductGrid> = React.memo(
+  ({ products, loading }) => {
+    const dispatch = useDispatch();
 
-
-  console.log("ProductGrid re render");
-  
-  const dispatch = useDispatch();
-
-  const ProductSkeleton = () => {
-    return (
-      <>
-        {Array(10)
-          .fill(0)
-          .map((_, i) => (
-            <div
-              key={i}
-              style={{ display: "flex", flexDirection: "column", gap: 8 }}
-            >
-              <Skeleton height="192px" style={{ borderRadius: 12 }} />
-              <Skeleton height="20px" />
-              <Skeleton height="16px" />
-              <Skeleton height="32px" />
-            </div>
-          ))}
-      </>
-    );
-  };
-
-  return (
-    <Grid>
-      {loading ? (
-        <ProductSkeleton />
-      ) : (
+    const ProductSkeleton = () => {
+      return (
         <>
-          {products.length > 0 ? (
-            products.map((i) => (
-              <ProductCard
-                key={i.name}
-                title={i.name}
-                price={i.price}
-                imgSrc={`https://picsum.photos/200/300?random=${Math.random()}`}
-                id={i.name}
-                onSelect={() => dispatch(addOrIncreaseItem(i))}
-              />
-            ))
-          ) : (
-            <>No products found!</>
-          )}
+          {Array(10)
+            .fill(0)
+            .map((_, i) => (
+              <div
+                key={i}
+                style={{ display: "flex", flexDirection: "column", gap: 8 }}
+              >
+                <Skeleton height="192px" style={{ borderRadius: 12 }} />
+                <Skeleton height="20px" />
+                <Skeleton height="16px" />
+                <Skeleton height="32px" />
+              </div>
+            ))}
         </>
-      )}
-    </Grid>
-  );
-});
+      );
+    };
+
+    return (
+      <Grid>
+        {loading ? (
+          <ProductSkeleton />
+        ) : (
+          <>
+            {products.length > 0 ? (
+              products.map((i) => (
+                <ProductCard
+                  key={i.name}
+                  title={i.name}
+                  price={i.price}
+                  imgSrc={`https://picsum.photos/200/300?random=${Math.random()}`}
+                  id={i.name}
+                  onSelect={() => dispatch(addOrIncreaseItem(i))}
+                />
+              ))
+            ) : (
+              <>No products found!</>
+            )}
+          </>
+        )}
+      </Grid>
+    );
+  }
+);
 
 export default React.memo(ProductList);
