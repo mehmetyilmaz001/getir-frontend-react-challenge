@@ -5,7 +5,8 @@ export const colors = {
   blue2: "#147594",
   gray1: "#525252",
   gray2: "#E0E0E0",
-  gray3: "#697488"
+  gray3: "#697488",
+  black: "#191919"
 }
 const theme = {
   color: {
@@ -18,6 +19,7 @@ const theme = {
       hover: colors.gray2,
       active: colors.gray2,
       activeTextColor: colors.white,
+      text: colors.white,
     },
     secondary: {
       main: colors.white1,
@@ -25,6 +27,7 @@ const theme = {
       hover: colors.gray2,
       active: colors.gray1,
       activeTextColor: colors.white,
+      text: colors.black,
     },
     transparent: {
       main: "transparent",
@@ -32,6 +35,7 @@ const theme = {
       hover: colors.gray2,
       active: colors.gray1,
       activeTextColor: colors.white,
+      text: colors.blue1,
     },
     accent: {
       main: colors.blue2,
@@ -52,7 +56,7 @@ const theme = {
       body: "#FAFAFA",
     },
     text: {
-      primary: "#191919",
+      primary: colors.black,
       secondary: "#697488",
       tertiary: "#6F6F6F",
       label: "#525252",

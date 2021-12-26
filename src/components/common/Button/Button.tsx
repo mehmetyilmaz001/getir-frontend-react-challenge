@@ -4,8 +4,11 @@ import theme from "../../../style/Theme";
 const Button = styled.button<{
     customType: "primary" | "secondary" | "transparent";
 }>`
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: ${({customType}) => theme.palette[customType]["main"]};
-    color: ${({customType}) => customType as string === "primary" ? "white" : theme.palette.text.primary};
+    color: ${({customType}) => theme.palette[customType]["text"]};
     border: none;
     height: 32px;
     min-width: ${({customType}) => customType as string === "transparent" ? "30px" : "62px"};

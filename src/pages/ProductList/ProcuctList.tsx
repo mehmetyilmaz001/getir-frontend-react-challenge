@@ -4,7 +4,11 @@ import RadioGroup from "../../components/common/RadioGroup";
 import theme from "../../style/Theme";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, setPagination, setSelectedItemType } from "../../redux/reducers/ProductReducer";
+import {
+  getProducts,
+  setPagination,
+  setSelectedItemType,
+} from "../../redux/reducers/ProductReducer";
 import { Store } from "../../redux";
 import {
   getBrands,
@@ -17,7 +21,6 @@ import Skeleton from "react-loading-skeleton";
 import Pagination from "../../components/common/Pagination/Pagination";
 import BasketCard from "../../components/BasketCard/BasketCard";
 import { addOrIncreaseItem } from "../../redux/reducers/BasketReducer";
-
 
 const Container = styled.div`
   display: flex;
@@ -63,9 +66,16 @@ const Title = styled.h4`
 interface ProductListProps {}
 
 const ProductList: FunctionComponent<ProductListProps> = () => {
-
   const dispatch = useDispatch();
-  const { data, loading, selectedItemType, pagination, selectedBrands, selectedSort, selectedTags } = useSelector((state: Store) => state.product);
+  const {
+    data,
+    loading,
+    selectedItemType,
+    pagination,
+    selectedBrands,
+    selectedSort,
+    selectedTags,
+  } = useSelector((state: Store) => state.product);
   const { items, total } = useSelector((state: Store) => state.basket);
   const {
     brands,
@@ -76,15 +86,20 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
 
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch, pagination.page, selectedBrands, selectedSort, selectedTags, selectedItemType]);
-
+  }, [
+    dispatch,
+    pagination.page,
+    selectedBrands,
+    selectedSort,
+    selectedTags,
+    selectedItemType,
+  ]);
 
   useEffect(() => {
     dispatch(getTags());
     dispatch(getBrands());
     dispatch(getItemTypes());
   }, [dispatch]);
-
 
   return (
     <Container>
@@ -111,23 +126,21 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
 
         <ProductGrid products={data.items} loading={loading} />
 
-        {data.count > 16 && 
-          <div style={{padding: 33}}>
-          
-          <Pagination 
-            totalPages={Math.ceil(pagination.count / pagination.pageSize)} 
-            activePage={pagination.page} 
-            onChange={(page: number) => dispatch(setPagination({...pagination, page}))} />
-
-         </div>
-        }
-      
+        {data.count > 16 && (
+          <div style={{ padding: 33 }}>
+            <Pagination
+              totalPages={Math.ceil(pagination.count / pagination.pageSize)}
+              activePage={pagination.page}
+              onChange={(page: number) =>
+                dispatch(setPagination({ ...pagination, page }))
+              }
+            />
+          </div>
+        )}
       </ListingColumn>
 
       <BasketColumn>
-        <BasketCard data={
-          {items, total}
-        } />
+        {items.length > 0 && <BasketCard data={{ items, total }} />}
       </BasketColumn>
     </Container>
   );
@@ -143,15 +156,18 @@ const ProductGrid: FunctionComponent<IProductGrid> = ({
   loading,
 }) => {
   const dispatch = useDispatch();
-  
+
   const ProductSkeleton = () => {
     return (
       <>
         {Array(10)
           .fill(0)
           .map((_, i) => (
-            <div key={i} style={{display:"flex", flexDirection: "column", gap: 8}}>
-              <Skeleton height="192px" style={{borderRadius: 12}} />
+            <div
+              key={i}
+              style={{ display: "flex", flexDirection: "column", gap: 8 }}
+            >
+              <Skeleton height="192px" style={{ borderRadius: 12 }} />
               <Skeleton height="20px" />
               <Skeleton height="16px" />
               <Skeleton height="32px" />
@@ -167,19 +183,20 @@ const ProductGrid: FunctionComponent<IProductGrid> = ({
         <ProductSkeleton />
       ) : (
         <>
-       { products.length > 0 ? products.map((i) => (
-          <ProductCard
-            key={i.name}
-            title={i.name}
-            price={i.price}
-            imgSrc={`https://picsum.photos/200/300?random=${Math.random()}`}
-            id={i.name}
-            onSelect={() => dispatch(addOrIncreaseItem(i))}
-          />
-          
-        )): <>No products found!</>}
-
-        
+          {products.length > 0 ? (
+            products.map((i) => (
+              <ProductCard
+                key={i.name}
+                title={i.name}
+                price={i.price}
+                imgSrc={`https://picsum.photos/200/300?random=${Math.random()}`}
+                id={i.name}
+                onSelect={() => dispatch(addOrIncreaseItem(i))}
+              />
+            ))
+          ) : (
+            <>No products found!</>
+          )}
         </>
       )}
     </Grid>

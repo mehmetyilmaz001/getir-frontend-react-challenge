@@ -14,7 +14,21 @@ interface BasketCardProps {
 const Container = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     gap: ${theme.spacing(4)};
+`;
+
+
+const Total = styled.div`
+    display: flex;
+    width: 92px;
+    height: 51px;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid ${theme.palette.primary.main};
+    color: ${theme.palette.primary.main};
+    font-size: 14px;
+    font-weight: 600;
 `;
  
 const BasketCard: React.FunctionComponent<BasketCardProps> = ({data}) => {
@@ -22,7 +36,7 @@ const BasketCard: React.FunctionComponent<BasketCardProps> = ({data}) => {
         <Card style={{border: `solid 6px ${theme.palette.primary.main}`}}>
             <Container>
                 {data.items.map((item, index) => <BasketListItem key={index} item={item} />)}
-                <FormattedLabel price={data.total} />
+               <Total> <FormattedLabel price={data.total} /></Total>
             </Container>
         </Card>
      );
