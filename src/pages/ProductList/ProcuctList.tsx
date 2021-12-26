@@ -1,8 +1,5 @@
 import { FunctionComponent, useEffect } from "react";
-import styled from "styled-components";
 import RadioGroup from "../../components/common/RadioGroup";
-import theme from "../../style/Theme";
-import ProductCard from "../../components/ProductCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProducts,
@@ -16,75 +13,13 @@ import {
   getTags,
 } from "../../redux/reducers/LookupReducer";
 import FiltersWithLookup from "./components/Filters";
-import { Item } from "../../types/Item";
-import Skeleton from "react-loading-skeleton";
 import Pagination from "../../components/common/Pagination/Pagination";
 import BasketCard from "../../components/BasketCard/BasketCard";
-import { addOrIncreaseItem } from "../../redux/reducers/BasketReducer";
 import React from "react";
-import { mq } from "../../style/Mixins";
 import Sort from "./components/Sort";
+import { BasketColumn, Container, FilterColumn, ListingColumn, PaginationContainer, Title } from "./components/StyledComponents";
+import ProductGrid from "./components/ProductGrid";
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: ${theme.spacing(4)};
-`;
-
-const FilterColumn = styled.div`
-  flex: 1;
-  > div {
-    margin-bottom: ${theme.spacing(6)};
-  }
-`;
-
-const ListingColumn = styled.div`
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing(4)};
-
-  ${mq("mobile")} {
-    padding: 10px;
-  }
-`;
-
-const BasketColumn = styled.div`
-  flex: 1;
-`;
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: ${theme.spacing(5)};
-  padding: ${theme.spacing(5)};
-  background: #ffffff;
-  box-shadow: 0px 4px 24px rgba(93, 62, 188, 0.04);
-  border-radius: 2px;
-
-  ${mq("mobile")} {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  ${mq("tablet")} {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-`;
-
-const Title = styled.h4`
-  color: ${theme.palette.text.tertiary};
-  font-size: 20px;
-  margin-top: 0;
-  margin-bottom: 0;
-`;
-
-const PaginationContainer = styled.div`
-  padding: 33px;
-
-  ${mq("mobile")} {
-    padding: 5px;
-  }
-`;
 
 interface ProductListProps {}
 
@@ -174,61 +109,6 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
   );
 };
 
-interface IProductGrid {
-  products: Item[];
-  loading: boolean;
-}
 
-const ProductGrid: FunctionComponent<IProductGrid> = React.memo(
-  ({ products, loading }) => {
-    const dispatch = useDispatch();
-
-    const ProductSkeleton = () => {
-      return (
-        <>
-          {Array(10)
-            .fill(0)
-            .map((_, i) => (
-              <div
-                key={i}
-                style={{ display: "flex", flexDirection: "column", gap: 8 }}
-              >
-                <Skeleton height="192px" style={{ borderRadius: 12 }} />
-                <Skeleton height="20px" />
-                <Skeleton height="16px" />
-                <Skeleton height="32px" />
-              </div>
-            ))}
-        </>
-      );
-    };
-
-    return (
-      <Grid>
-        
-        {loading ? (
-          <ProductSkeleton />
-        ) : (
-          <>
-            {products.length > 0 ? (
-              products.map((i) => (
-                <ProductCard
-                  key={i.name}
-                  title={i.name}
-                  price={i.price}
-                  imgSrc={`https://picsum.photos/200/300?random=${Math.random()}`}
-                  id={i.name}
-                  onSelect={() => dispatch(addOrIncreaseItem(i))}
-                />
-              ))
-            ) : (
-              <>No products found!</>
-            )}
-          </>
-        )}
-      </Grid>
-    );
-  }
-);
 
 export default React.memo(ProductList);
