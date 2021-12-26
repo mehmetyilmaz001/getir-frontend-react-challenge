@@ -1,3 +1,4 @@
+import React from "react";
 import { FunctionComponent } from "react";
 import styled from "styled-components";
 import theme from "../../style/Theme";
@@ -61,4 +62,4 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({imgSrc, title, price,
   </Container>;
 };
 
-export default ProductCard;
+export default React.memo(ProductCard);

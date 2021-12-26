@@ -21,6 +21,7 @@ import Skeleton from "react-loading-skeleton";
 import Pagination from "../../components/common/Pagination/Pagination";
 import BasketCard from "../../components/BasketCard/BasketCard";
 import { addOrIncreaseItem } from "../../redux/reducers/BasketReducer";
+import React from "react";
 
 const Container = styled.div`
   display: flex;
@@ -151,10 +152,14 @@ interface IProductGrid {
   loading: boolean;
 }
 
-const ProductGrid: FunctionComponent<IProductGrid> = ({
+const ProductGrid: FunctionComponent<IProductGrid> = React.memo( ({
   products,
   loading,
 }) => {
+
+
+  console.log("ProductGrid re render");
+  
   const dispatch = useDispatch();
 
   const ProductSkeleton = () => {
@@ -201,6 +206,6 @@ const ProductGrid: FunctionComponent<IProductGrid> = ({
       )}
     </Grid>
   );
-};
+});
 
-export default ProductList;
+export default React.memo(ProductList);
