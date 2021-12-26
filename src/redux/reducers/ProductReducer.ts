@@ -1,5 +1,5 @@
 import { SortEnum, SortMapFunction } from "./../../enums/Sort";
-import { PaginationType } from "../../types/PaginationType";
+import { PaginationType } from "../../components/common/types/PaginationType";
 import { API_ITEMS_URL } from "./../../constants/api";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppDispatch, AppThunk } from "..";
