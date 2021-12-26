@@ -87,8 +87,6 @@ const CheckboxGroup: FunctionComponent<CheckboxGroupProps> = ({
     setSelectedOptions( found ? selectedOptions.filter((i) => i.value !== option.value) : [...selectedOptions, option])
   }, [selectedOptions]);
 
-  // console.log("checkbox group => ", value);
-
 
   return (
     <Card title={title}>

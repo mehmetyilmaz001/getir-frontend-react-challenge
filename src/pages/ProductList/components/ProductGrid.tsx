@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useDispatch } from "react-redux";
 import ProductCard from "../../../components/ProductCard/ProductCard";
-import { addOrIncreaseItem } from "../../../redux/reducers/BasketReducer";
+import { addOrRemoveItem } from "../../../redux/reducers/BasketReducer";
 import { Item } from "../../../types/Item";
 import { Grid } from "./StyledComponents";
 
@@ -51,7 +51,7 @@ interface IProductGrid {
                     price={i.price}
                     imgSrc={`https://picsum.photos/200/300?random=${Math.random()}`}
                     id={i.name}
-                    onSelect={() => dispatch(addOrIncreaseItem(i))}
+                    onSelect={() => dispatch(addOrRemoveItem({...i, quantity: 1}, 'add'))}
                   />
                 ))
               ) : (

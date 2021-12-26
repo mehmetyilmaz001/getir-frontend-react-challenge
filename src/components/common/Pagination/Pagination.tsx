@@ -39,7 +39,7 @@ const isAtTheLastPage = (activePage + 1) === totalPages;
       isAtTheLastPage={isAtTheLastPage}
       nextLabel={
         <NextPrevButton
-          disabled={(activePage + 1) === totalPages}
+          disabled={isAtTheLastPage}
           direction="right"
         />
       }
@@ -48,7 +48,7 @@ const isAtTheLastPage = (activePage + 1) === totalPages;
       pageCount={totalPages}
       previousLabel={
         <NextPrevButton
-          disabled={activePage === 0}
+          disabled={isAtTheFirstPage}
           direction="left"
         />
       }

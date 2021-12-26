@@ -23,7 +23,7 @@ const theme = {
       main: colors.blue1,
       light: colors.white1,
       hover: colors.gray2,
-      active: colors.gray2,
+      active: colors.gray3,
       activeTextColor: colors.white,
       text: colors.white,
     },

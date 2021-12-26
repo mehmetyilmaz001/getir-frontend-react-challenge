@@ -25,32 +25,22 @@ const initialState: Basket = {
 
 
 
- export const addOrIncreaseItem = (item: Item):  AppThunk => async (dispatch: AppDispatch, getState) => {
+ export const addOrRemoveItem = (item: BasketItem , action: 'add' | 'remove'):  AppThunk => async (dispatch: AppDispatch, getState) => {
     const { items } = getState().basket;
     const existingItem = items.find(i => i.name === item.name);
     
     let newItems = [];
     if (existingItem) {
-      newItems = items.map(i => i.name === item.name ? { ...existingItem, quantity: existingItem.quantity + 1 } : i);
-    }else{
-      newItems = [...items, { ...item, quantity: 1 }];
-    }
-    
-    dispatch(setItems(newItems));
-    dispatch(setTotal(calculateTotal(newItems)));
-}
+        if (action === 'add') {
+          newItems = items.map(i => i.name === item.name ? { ...existingItem, quantity: existingItem.quantity + 1 } : i);
+        }else{
 
-export const removeOrDecreaseItem = (item: BasketItem): AppThunk => async (dispatch: AppDispatch, getState) => {
-    const { items } = getState().basket;
-    const existingItem = items.find(i => i.name === item.name);
-    let newItems = [];
-    
-    if (existingItem) {
-      if(item.quantity === 1){
-        newItems = items.filter(i => i.name !== item.name);
-      }else{
-        newItems = items.map(i => i.name === item.name ? { ...existingItem, quantity: existingItem.quantity - 1 } : i);
-      }
+          if(item.quantity === 1){
+            newItems = items.filter(i => i.name !== item.name);
+          }else{
+            newItems = items.map(i => i.name === item.name ? { ...existingItem, quantity: existingItem.quantity - 1 } : i);
+          }
+        }
       
     }else{
       newItems = [...items, { ...item, quantity: 1 }];
@@ -59,7 +49,6 @@ export const removeOrDecreaseItem = (item: BasketItem): AppThunk => async (dispa
     dispatch(setItems(newItems));
     dispatch(setTotal(calculateTotal(newItems)));
 }
- 
 
  const calculateTotal = (items: BasketItem[]): number => {
     return items.reduce((total, item) => total + item.price * item.quantity, 0);

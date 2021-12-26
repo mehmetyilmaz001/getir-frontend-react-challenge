@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { addOrIncreaseItem, removeOrDecreaseItem } from '../../../../redux/reducers/BasketReducer';
+import { addOrRemoveItem } from '../../../../redux/reducers/BasketReducer';
 import theme, { colors } from '../../../../style/Theme';
 import { BasketItem} from '../../../../types/Basket';
 import Button from '../../../common/Button/Button';
@@ -77,9 +77,9 @@ const BasketListItem: FunctionComponent<BasketItemProps> = ({item}) => {
             </TitleAndPrice>
 
             <Buttons>
-                <Button customType='transparent' onClick={() => dispatch(removeOrDecreaseItem(item))}><MinusIcon /></Button>
+                <Button customType='transparent' onClick={() => dispatch(addOrRemoveItem(item, 'remove'))}><MinusIcon /></Button>
                 <Quaintity>{item.quantity}</Quaintity>
-                <Button customType='transparent' onClick={() => dispatch(addOrIncreaseItem(item))}><PlusIcon /></Button>
+                <Button customType='transparent' onClick={() => dispatch(addOrRemoveItem(item, 'add'))}><PlusIcon /></Button>
             </Buttons>
         </BasketItemContainer>
       );
