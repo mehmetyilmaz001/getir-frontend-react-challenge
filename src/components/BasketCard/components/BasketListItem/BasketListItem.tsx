@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { addOrIncreaseItem, removeOrDecreaseItem } from '../../../redux/reducers/BasketReducer';
-import theme, { colors } from '../../../style/Theme';
-import { BasketItem} from '../../../types/Basket';
-import Button from '../../common/Button/Button';
-import FormattedLabel from '../../common/FormattedLabel/FormattedLabel';
+import { addOrIncreaseItem, removeOrDecreaseItem } from '../../../../redux/reducers/BasketReducer';
+import theme, { colors } from '../../../../style/Theme';
+import { BasketItem} from '../../../../types/Basket';
+import Button from '../../../common/Button/Button';
+import FormattedLabel from '../../../common/FormattedLabel/FormattedLabel';
 import { ReactComponent as MinusIcon } from '../../common/assets/minus.svg';
 import { ReactComponent as PlusIcon } from '../../common/assets/plus.svg';
 

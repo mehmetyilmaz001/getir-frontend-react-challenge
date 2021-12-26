@@ -3,7 +3,7 @@ import styled from "styled-components";
 import theme from "../../style/Theme";
 
 import logo from "../../assets/market-logo.svg";
-import BasketTotal from "../../components/BasketCard/components/BasketTotal";
+import BasketTotal from "../../components/BasketCard/components/BasketTotal/BasketTotal";
 import { mq } from "../../style/Mixins";
 import React from "react";
 import BasketCard from "../../components/BasketCard/BasketCard";

@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basket card renders correctly 1`] = `
+<div>
+  <div
+    className="sc-bdvvtL kCZqhj"
+    style={
+      Object {
+        "border": "solid 6px #1EA4CE",
+      }
+    }
+  >
+    <div
+      className="sc-pVTFL eQkbfo"
+    >
+      <div
+        className="sc-hKwDye OJpkq"
+      >
+        <div
+          className="sc-eCImPb guduZA"
+        >
+          <h5>
+            test
+          </h5>
+          <span
+            className="sc-jRQBWg iOTVYR"
+          >
+            ₺111,00
+          </span>
+        </div>
+        <div
+          className="sc-gKclnd lgFLFZ"
+        >
+          <button
+            className="sc-dkPtRN cxHOOF"
+            onClick={[Function]}
+          >
+            <div />
+          </button>
+          <div
+            className="sc-iCfMLu kRtLJS"
+          >
+            1
+          </div>
+          <button
+            className="sc-dkPtRN cxHOOF"
+            onClick={[Function]}
+          >
+            <div />
+          </button>
+        </div>
+      </div>
+      <div
+        className="sc-jrQzAO bnErJq"
+      >
+        <div
+          className="sc-furwcr dxZlul"
+        >
+          <span>
+            ₺2.222,00
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Store } from '../../redux';
 import theme from '../../style/Theme';
 import Card from '../common/Card';
-import BasketListItem from './components/BasketListItem';
-import BasketTotal from './components/BasketTotal';
+import BasketListItem from './components/BasketListItem/BasketListItem';
+import BasketTotal from './components/BasketTotal/BasketTotal';
 
 
 interface BasketCardProps {

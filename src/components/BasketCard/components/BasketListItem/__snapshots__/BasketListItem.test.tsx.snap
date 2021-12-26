@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basket list item renders correctly 1`] = `
+<div
+  className="sc-gsDKAQ iZHfAx"
+>
+  <div
+    className="sc-dkPtRN dOwCeb"
+  >
+    <h5>
+      test
+    </h5>
+    <span
+      className="sc-hKwDye jFULnG"
+    >
+      ₺111,00
+    </span>
+  </div>
+  <div
+    className="sc-eCImPb bycmXI"
+  >
+    <button
+      className="sc-bdvvtL bLUCpk"
+      onClick={[Function]}
+    >
+      <div />
+    </button>
+    <div
+      className="sc-jRQBWg gIqxUt"
+    >
+      1
+    </div>
+    <button
+      className="sc-bdvvtL bLUCpk"
+      onClick={[Function]}
+    >
+      <div />
+    </button>
+  </div>
+</div>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Basket total renders from redux store correctly 1`] = `
+<div
+  className="sc-bdvvtL eYgSuc"
+>
+  <span>
+    ₺2.222,00
+  </span>
+</div>
+`;
