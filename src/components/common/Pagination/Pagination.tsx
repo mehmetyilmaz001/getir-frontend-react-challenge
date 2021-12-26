@@ -1,81 +1,7 @@
 import { FunctionComponent } from "react";
-import { ReactComponent as LeftArrow } from "../assets/arrow-left.svg";
-import { ReactComponent as RightArrow } from "../assets/arrow-right.svg";
-import theme, { colors } from "../../../style/Theme";
-import styled from "styled-components";
-import ReactPaginate from "react-paginate";
-import { mq } from "../../../style/Mixins";
+import NextPrevButton from "./components/NextPrevButton";
+import { StyledPagination } from "./components/StyledComponent";
 
-const StyledPagination = styled(ReactPaginate)<{
-    isAtTheFirstPage: boolean;
-    isAtTheLastPage: boolean;
-}>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  list-style: none;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-
-  > li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    height: 40px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 2px;
-
-    ${mq("mobile")} {
-      font-size: 11px;
-    }
-
-    a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      line-height: 100%;
-      width: 100%;
-      height: 100%;
-      user-select: none;
-    }
-
-    &.previous {
-        margin-right: 40px;
-
-        > a {
-            cursor: ${({isAtTheFirstPage}) => isAtTheFirstPage ? 'not-allowed': 'pointer'};
-        }
-    }
-    &.next {
-        margin-left: 40px;
-
-        > a {
-            cursor: ${({isAtTheLastPage}) => isAtTheLastPage ? 'not-allowed': 'pointer'};
-        }
-    }
-
-    ${mq("mobile")} {
-      &.previous {
-        margin-right: 10px;
-      }
-      &.next {
-        margin-left: 10px;
-      }
-    }
-
-    &:hover {
-      background-color: ${theme.palette.primary.hover};
-    }
-
-    &.selected {
-      background-color: ${theme.palette.primary.main};
-      color: ${colors.white};
-    }
-  }
-`;
 
 interface PaginationProps {
   /**
@@ -106,6 +32,7 @@ const isAtTheLastPage = (activePage + 1) === totalPages;
 
   return (
     <StyledPagination
+      
       aria-label="pagination"
       breakLabel="..."
       isAtTheFirstPage={isAtTheFirstPage}
@@ -134,44 +61,3 @@ const isAtTheLastPage = (activePage + 1) === totalPages;
 
 export default Pagination;
 
-interface INextPrevButton {
-  disabled: boolean;
-  direction: "left" | "right";
-}
-
-const NextPrevButton: FunctionComponent<INextPrevButton> = ({
-  disabled,
-  direction,
-}) => {
-  const color = disabled ? theme.palette.disabled : theme.palette.primary.main;
-
-  const StyledButton = styled.span`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    font-weight: bold;
-    font-size: 14px;
-    color: ${color};
-    user-select: none;
-
-    ${mq("mobile")} {
-      font-size: 11px;
-    }
-  `;
-
-  return (
-    <StyledButton>
-      {direction === "left" ? (
-        <>
-          <LeftArrow fill={color} /> Prev
-        </>
-      ) : (
-        <>
-          {" "}
-          Next <RightArrow fill={color} />
-        </>
-      )}
-    </StyledButton>
-  );
-};

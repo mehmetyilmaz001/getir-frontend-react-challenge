@@ -62,7 +62,6 @@ const CheckboxGroup: FunctionComponent<CheckboxGroupProps> = ({
 
   useDidUpdate(() => {
     setOptions([...options])
-    console.log("useDidUpdate callad", options.length);
   }, [options.length])
   
   useDidUpdate(() => {
