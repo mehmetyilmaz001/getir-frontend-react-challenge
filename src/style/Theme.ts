@@ -12,6 +12,9 @@ const theme = {
   color: {
     white: "#fff",
   },
+  desktop: {
+    containerSize: "80%"
+  },
   palette: {
     primary: {
       main: colors.blue1,

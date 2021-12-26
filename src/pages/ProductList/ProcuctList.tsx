@@ -77,7 +77,7 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
     selectedSort,
     selectedTags,
   } = useSelector((state: Store) => state.product);
-  const { items, total } = useSelector((state: Store) => state.basket);
+  
   const {
     brands,
     tags,
@@ -141,7 +141,7 @@ const ProductList: FunctionComponent<ProductListProps> = () => {
       </ListingColumn>
 
       <BasketColumn>
-        {items.length > 0 && <BasketCard data={{ items, total }} />}
+        <BasketCard />
       </BasketColumn>
     </Container>
   );

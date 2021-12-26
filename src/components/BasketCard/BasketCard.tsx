@@ -1,14 +1,14 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { Store } from '../../redux';
 import theme from '../../style/Theme';
-import { Basket} from '../../types/Basket';
 import Card from '../common/Card';
-import FormattedLabel from '../common/FormattedLabel/FormattedLabel';
 import BasketListItem from './components/BasketListItem';
+import BasketTotal from './components/BasketTotal';
 
 
 interface BasketCardProps {
-    data: Basket;
 }
 
 const Container = styled.div`
@@ -19,30 +19,37 @@ const Container = styled.div`
 `;
 
 
-const Total = styled.div`
-    display: flex;
+const TotalContainer = styled.div`
     width: 92px;
     height: 51px;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid ${theme.palette.primary.main};
-    color: ${theme.palette.primary.main};
-    font-size: 14px;
-    font-weight: 600;
-`;
+`
  
-const BasketCard: React.FunctionComponent<BasketCardProps> = ({data}) => {
+const BasketCard: React.FunctionComponent<BasketCardProps> = () => {
+    
+    const { items } = useSelector((state: Store) => state.basket);
+    if(items.length === 0) {
+        return <></>;
+    }
     return ( 
         <Card style={{border: `solid 6px ${theme.palette.primary.main}`}}>
             <Container>
-                {data.items.map((item, index) => <BasketListItem key={index} item={item} />)}
-               <Total> <FormattedLabel price={data.total} /></Total>
+                {items.map((item, index) => <BasketListItem key={index} item={item} />)}
+
+                <TotalContainer>
+                    <BasketTotal showBasketIcon={false} theme='light'/>
+               </TotalContainer>
             </Container>
         </Card>
      );
 }
  
 export default BasketCard;
+
+
+
+ 
+
+ 
 
 
 
