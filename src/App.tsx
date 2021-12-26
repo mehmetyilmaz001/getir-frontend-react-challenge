@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import CommonLayout from "./layouts/CommonLayout";
-import ProductList from "./pages/ProductList/ProcuctList";
+import ProductList from "./pages/ProductList/ProductList";
 import { setIsBigScreen, setIsDesktopOrLaptop, setIsPortrait, setIsRetina, setIsTabletOrMobile } from "./redux/reducers/RootReducer";
 import GlobalStyle from "./style/GlobalStyle";
 

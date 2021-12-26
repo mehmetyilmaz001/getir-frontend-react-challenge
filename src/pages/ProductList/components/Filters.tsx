@@ -29,7 +29,7 @@ const FiltersWithLookup: React.FunctionComponent<IFiltersWithLookup> = () => {
   const SkeletonList = React.memo(() => {
     return (
       <>
-        {["Sort", "Brands", "Tags"].map((i) => (
+        {["Brands", "Tags"].map((i) => (
           <Card key={i} title="Sort">
             <div style={{ gap: 8, display: "flex", flexDirection: "column" }}>
               {Array(4)
@@ -49,7 +49,7 @@ const FiltersWithLookup: React.FunctionComponent<IFiltersWithLookup> = () => {
   }
 
   return (
-    <div>
+    <div style={{display: 'flex', gap: 16, flexDirection: 'column'}}>
       <CheckboxGroup
         title="Brands"
         options={brands.map((i: string) => ({ value: i, label: i }))}
@@ -68,7 +68,7 @@ const FiltersWithLookup: React.FunctionComponent<IFiltersWithLookup> = () => {
         onChange={(tags: Option[]) => dispatch(setSelectedTags(tags))}
       />
 
-      <Button customType="primary" onClick={() => dispatch(clearFilters())}>Clear Filters</Button>
+      <Button customType="secondary" onClick={() => dispatch(clearFilters())}>Clear Filters</Button>
     </div>
   )
 };
