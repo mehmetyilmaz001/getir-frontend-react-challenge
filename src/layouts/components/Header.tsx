@@ -135,7 +135,7 @@ const Header: FunctionComponent<HeaderProps> = () => {
             </FilterButton>
           )}
           <img src={logo} alt="Market" className="logo"/>
-          <BasketContainer onClick={_toggleBasketVisibility}>
+          <BasketContainer onClick={_toggleBasketVisibility} role={isTabletOrMobile ? "button": ""}>
             <BasketTotal theme="dark" showBasketIcon={true} />
           </BasketContainer>
         </HeaderInnerContainer>

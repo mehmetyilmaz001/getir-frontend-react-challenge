@@ -36,7 +36,7 @@ interface IProductGrid {
       };
   
       return (
-        <Grid>
+        <Grid role={"grid"}>
           
           {loading ? (
             <ProductSkeleton />
@@ -45,6 +45,7 @@ interface IProductGrid {
               {products.length > 0 ? (
                 products.map((i) => (
                   <ProductCard
+                    aria-label={i.name}
                     key={i.name}
                     title={i.name}
                     price={i.price}

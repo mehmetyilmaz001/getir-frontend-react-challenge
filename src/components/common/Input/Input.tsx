@@ -30,7 +30,7 @@ const StyledInput = styled.input<InputProps>`
 const Input: FunctionComponent<InputProps> = (props) => {
     return (  
 
-        <StyledInput {...props} />
+        <StyledInput {...props} area-label={props.label} />
     );
 }
  

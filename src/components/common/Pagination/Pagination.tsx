@@ -106,6 +106,7 @@ const isAtTheLastPage = (activePage + 1) === totalPages;
 
   return (
     <StyledPagination
+      aria-label="pagination"
       breakLabel="..."
       isAtTheFirstPage={isAtTheFirstPage}
       isAtTheLastPage={isAtTheLastPage}

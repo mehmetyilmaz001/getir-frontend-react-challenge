@@ -47,6 +47,9 @@ const RadioButton: React.FunctionComponent<RadioButtonProps> = ({id, name, label
                 value={value} 
                 onChange={(event) => onChange(event!.target.value)}
                 checked={checked}
+                arial-label={label}
+                arial-labelledby={id}
+                aria-checked={checked}
             />
             <label htmlFor={id}>{label}</label>
         </Container>

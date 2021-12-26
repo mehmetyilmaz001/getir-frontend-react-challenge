@@ -60,6 +60,9 @@ const Checkbox: React.FunctionComponent<CheckboxProps> = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         checked={checked}
+        aria-label={label}
+        aria-labelledby={id}
+        aria-checked={checked}
       />
 
       {/* <input type={"checkbox"} id={id} value={value} onChange={(e) => onChange(e.target.value)} checked={checked} /> */}

@@ -30,7 +30,7 @@ interface ModalProps {
  
 const Modal: FunctionComponent<ModalProps> = ({children, onClose, className}) => {
     return ( 
-        <ModalContaniner className={className}>
+        <ModalContaniner className={className} aria-modal={true} role={"dialog"} aria-labelledby="Modal">
             <CloseButton customType="primary" onClick={onClose}>X</CloseButton>
             <div className="modal-body">
                 {children}
