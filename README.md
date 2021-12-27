@@ -3,7 +3,7 @@
 This project was created for demonstrating frontend developent skills. 
 
 
-## Live demo: [Netfly](https://google.com) 
+## Live demo: [https://hardcore-wescoff-c6abd6.netlify.app/](https://hardcore-wescoff-c6abd6.netlify.app/)
 
 \
 &nbsp;
