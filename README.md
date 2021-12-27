@@ -1,27 +1,43 @@
 # Frontend Coding Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and has addtional libraries included:
-
-- [Redux](https://redux.js.org/)
-- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
-- [React Redux](https://react-redux.js.org/)
-- [styled-components](https://styled-components.com/)
-- [polished](https://polished.js.org/)
+This project was created for demonstrating frontend developent skills. 
 
 
+## Live demo: [Netfly](https://google.com) 
+
+\
+&nbsp;
+
+Live fake api: [https://mock-product-service.herokuapp.com/](https://mock-product-service.herokuapp.com/) \
+Repo: https://github.com/mehmetyilmaz001/getir-frontend-react-challenge
+
+
+
+\
+&nbsp;
+\
+&nbsp;
+
+
+## Previews
+![preview](.github/mobile.gif)
+![preview](.github/desktop.gif)
+
+
+
+
+\
+&nbsp;
+\
+&nbsp;
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you can run for the local development enviroment which is configured on json-server:
 
 ### `yarn start`
 
 Starts the fake REST API server on [http://localhost:4000](http://localhost:4000) and runs the app in development mode on [http://localhost:3000](http://localhost:3000).
 
-#### Notes
-
-- The page will reload if you make edits.
-- You will also see any TypeScript or lint errors in the console.
-- You can re-run the script to reset/regenerate the data.
 
 ### `yarn start:web`
 
@@ -31,11 +47,6 @@ yarn start:web
 
 Runs the app in development mode on [http://localhost:3000](http://localhost:3000).
 
-#### Notes
-
-- The page will reload if you make edits.
-- You will also see any TypeScript or lint errors in the console.
-
 ### `yarn start:api`
 
 ```sh
@@ -44,10 +55,36 @@ yarn start:web
 
 Starts the fake REST API server on [http://localhost:4000](http://localhost:4000).
 
-#### Notes
 
-- You can re-run the script to reset/regenerate the data.
+\
+&nbsp;
+\
+&nbsp;
 
 ## Fake REST API
 
 Running on [http://localhost:4000](http://localhost:4000).
+
+
+\
+&nbsp;
+\
+&nbsp;
+
+## The tools that used
+
+- Typescript
+- Redux Toolkit
+- Styled Components
+- Jest
+- json-server
+- create-react-app
+
+\
+&nbsp;
+\
+&nbsp;
+  
+### Note
+All simple ui components (excep pagination) were created by me.
+  
