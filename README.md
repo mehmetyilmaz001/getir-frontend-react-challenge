@@ -1,6 +1,6 @@
 # Frontend Coding Challenge
 
-This project was created for demonstrating frontend developent skills. 
+This project was created for demonstrating frontend development skills. 
 
 
 ## Live demo: [https://hardcore-wescoff-c6abd6.netlify.app/](https://hardcore-wescoff-c6abd6.netlify.app/)
